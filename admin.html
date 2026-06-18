@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>KeyDash · Admin</title>
+   <link rel="icon" href="images/logo.jpeg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F59E0B'%3E%3Cpath d='M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.87-3.13-7-7-7zM9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1z'/%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ===== GLOBAL RESET & BASE ===== */
+    * { -webkit-tap-highlight-color: transparent; }
+    
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    .dark ::-webkit-scrollbar-thumb { background: #475569; }
+    ::-webkit-scrollbar-thumb:hover { background: #f59e0b; }
+
+    /* ===== UTILITIES ===== */
+    .hover-scale { transition: transform 0.2s ease-in-out; }
+    .hover-scale:hover { transform: translateY(-3px) scale(1.01); }
+
+    /* ===== NAV LINKS ===== */
+    .nav-link { border-radius: 0.75rem; transition: all 0.2s ease; }
+    .nav-link:hover:not(.active) { background-color: rgba(245, 158, 11, 0.1); color: #d97706; }
+    .dark .nav-link:hover:not(.active) { background-color: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+    
+    .nav-link.active { 
+      background-color: #f59e0b; 
+      color: #ffffff; 
+      font-weight: 600; 
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3); 
+    }
+    .dark .nav-link.active { color: #0f172a; }
+    .dark .title{ color: #ffffff !important; }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 font-sans antialiased transition-colors duration-300">
+
+<div class="flex h-screen overflow-hidden">
+
+  <!-- Mobile Overlay -->
+  <div id="overlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden z-40 lg:hidden transition-opacity"></div>
+
+  <!-- SIDEBAR -->
+  <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 w-72 max-w-[85vw] bg-white dark:bg-slate-800 flex flex-col transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out z-50 shadow-2xl lg:shadow-none border-r border-slate-200 dark:border-slate-700">
+    <!-- Brand -->
+    <div class="p-4 sm:p-6 flex justify-between items-center border-b border-slate-100 dark:border-slate-700/50">
+       <h1 class="text-xl sm:text-2xl text-slate-900 font-bold tracking-tight">
+          <a href="index.html" class="title flex items-center gap-2">
+            <i class="title bi bi-car-front-fill text-[#F59E0B]"></i>
+            KeyDash
+          </a>
+        </h1>
+      <button id="closeSidebar" class="lg:hidden text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1.5 sm:p-2 rounded-xl transition-colors">
+        <i class="bi bi-x-lg text-lg sm:text-xl"></i>
+      </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1 p-3 sm:p-4 space-y-1 text-sm overflow-y-auto">
+      <a href="javascript:void(0)" onclick="showSection('dashboard')" class="nav-link active flex items-center gap-3 px-3 sm:px-4 py-3 text-slate-600 dark:text-slate-400">
+        <i class="bi bi-speedometer2 text-base sm:text-lg"></i> <span class="text-xs sm:text-sm">Admin Dashboard</span>
+      </a>
+      <a href="javascript:void(0)" onclick="showSection('upload-visualize')" class="nav-link flex items-center gap-3 px-3 sm:px-4 py-3 text-slate-600 dark:text-slate-400">
+        <i class="bi bi-camera-fill text-base sm:text-lg"></i> <span class="text-xs sm:text-sm">Upload & Visualize</span>
+      </a>
+      <a href="javascript:void(0)" onclick="showSection('style-gallery')" class="nav-link flex items-center gap-3 px-3 sm:px-4 py-3 text-slate-600 dark:text-slate-400">
+        <i class="bi bi-grid-3x3-gap-fill text-base sm:text-lg"></i> <span class="text-xs sm:text-sm">Key Type Library</span>
+      </a>
+      <a href="javascript:void(0)" onclick="showSection('furniture-catalog')" class="nav-link flex items-center gap-3 px-3 sm:px-4 py-3 text-slate-600 dark:text-slate-400">
+        <i class="bi bi-tags-fill text-base sm:text-lg"></i> <span class="text-xs sm:text-sm">Price Matrix</span>
+      </a>
+      <a href="javascript:void(0)" onclick="showSection('clients')" class="nav-link flex items-center gap-3 px-3 sm:px-4 py-3 text-slate-600 dark:text-slate-400">
+        <i class="bi bi-people-fill text-base sm:text-lg"></i> <span class="text-xs sm:text-sm">Service History</span>
+      </a>
+
+      <div class="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-slate-100 dark:border-slate-700/50">
+        <a href="login.html" class="flex items-center gap-3 px-3 sm:px-4 py-3 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 dark:text-red-400 transition-colors">
+          <i class="bi bi-box-arrow-left text-base sm:text-lg"></i> <span class="text-xs sm:text-sm">Logout</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Mobile Theme/RTL Controls -->
+    <div class="lg:hidden p-3 sm:p-4 space-y-1.5 sm:space-y-2 border-t border-slate-100 dark:border-slate-700/50">
+      <button onclick="toggleTheme()" class="w-full flex items-center gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-slate-50 dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 transition text-slate-600 dark:text-slate-300 text-xs sm:text-sm">
+        <i id="themeIconMobile" class="bi bi-moon-fill text-base sm:text-lg"></i> <span>Dark / Light</span>
+      </button>
+      <button onclick="toggleRTL()" class="w-full flex items-center gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-slate-50 dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 transition text-slate-600 dark:text-slate-300 text-xs sm:text-sm">
+        <i class="bi bi-arrow-left-right text-base sm:text-lg"></i> <span>RTL Mode</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="flex-1 flex flex-col overflow-hidden w-full relative">
+    
+    <!-- Top Header -->
+    <header class="bg-white/80 dark:bg-slate-800/80 backdrop-blur-md shadow-sm px-3 sm:px-8 py-3 sm:py-4 flex justify-between items-center z-20 border-b border-slate-200 dark:border-slate-700 sticky top-0">
+      <div class="flex items-center gap-2 sm:gap-4 min-w-0">
+        <button id="openSidebar" class="lg:hidden text-xl sm:text-2xl text-amber-500 hover:bg-slate-100 dark:hover:bg-slate-700 p-1.5 rounded-xl transition-colors shrink-0">
+          <i class="bi bi-list"></i>
+        </button>
+        <h1 id="page-title" class="text-base sm:text-lg md:text-xl font-bold text-slate-800 dark:text-white truncate">Admin Dashboard</h1>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-5 shrink-0">
+        <!-- Desktop Controls -->
+        <div class="hidden md:flex items-center gap-1.5 sm:gap-2">
+          <button onclick="toggleTheme()" class="p-2 sm:p-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-amber-500 hover:bg-amber-50 dark:hover:bg-slate-600 transition">
+            <i id="themeIconDesktop" class="bi bi-moon-fill text-sm sm:text-base"></i>
+          </button>
+          <button onclick="toggleRTL()" class="p-2 sm:p-2.5 rounded-xl border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-amber-500 hover:bg-amber-50 dark:hover:bg-slate-600 transition">
+            <i class="bi bi-arrow-left-right text-sm sm:text-base"></i>
+          </button>
+        </div>
+
+        <!-- User Profile -->
+        <div class="flex items-center gap-2 sm:gap-3 pl-2 sm:pl-5 border-l border-slate-200 dark:border-slate-700">
+          <div class="text-right hidden sm:block">
+            <p class="text-xs sm:text-sm font-semibold text-slate-800 dark:text-white leading-tight">Elena Wright</p>
+            <p class="text-[10px] sm:text-xs text-amber-600 dark:text-amber-400 font-medium">Admin · Locksmith</p>
+          </div>
+          <div class="relative" id="profileDropdown">
+            <button id="profileBtn" class="block focus:outline-none" aria-label="Profile menu">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Profile" class="w-8 sm:w-10 h-8 sm:h-10 rounded-full border-2 border-amber-400 object-cover cursor-pointer shadow-md transform transition hover:scale-105">
+            </button>
+            <!-- Dropdown -->
+            <div id="profileMenu" class="absolute right-0 mt-2 w-56 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 hidden transition-all z-30 overflow-hidden">
+              <div class="p-4 border-b border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
+                <p class="font-semibold text-sm sm:text-base text-slate-800 dark:text-white">Elena Wright</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">elena@keydash.com</p>
+                <span class="inline-block text-[10px] bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400 px-2.5 py-1 rounded-full mt-2 font-medium">Administrator</span>
+              </div>
+              <div class="py-1">
+                <a href="#" class="block px-4 py-2.5 text-xs sm:text-sm hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-colors"><i class="bi bi-person mr-2"></i> My Profile</a>
+                <a href="#" class="block px-4 py-2.5 text-xs sm:text-sm hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-colors"><i class="bi bi-gear mr-2"></i> Account Settings</a>
+              </div>
+              <div class="py-1 border-t border-slate-100 dark:border-slate-700">
+                <a href="#" class="block px-4 py-2.5 text-xs sm:text-sm hover:bg-red-50 dark:hover:bg-slate-700 text-red-600 dark:text-red-400 transition-colors"><i class="bi bi-box-arrow-right mr-2"></i> Sign Out</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Scrollable Area -->
+    <main class="flex-1 overflow-y-auto overflow-x-hidden p-3 sm:p-6 md:p-8">
+
+      <!-- SECTION 1: DASHBOARD -->
+      <div id="section-dashboard" class="content-section space-y-5 md:space-y-8 max-w-7xl mx-auto">
+        
+        <!-- Welcome Banner -->
+        <div class="bg-gradient-to-r from-amber-500 to-amber-400 dark:from-amber-600 dark:to-amber-500 text-white p-5 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl shadow-lg shadow-amber-500/20 relative overflow-hidden">
+          <div class="relative z-10">
+            <h2 class="text-xl sm:text-2xl lg:text-4xl font-bold tracking-tight">Welcome, Elena!</h2>
+            <p class="text-amber-50 mt-2 sm:mt-3 max-w-2xl text-xs sm:text-sm lg:text-base leading-relaxed">
+              Manage car key replacements, fob programming, technician dispatch, and key code records — all from one dashboard.
+            </p>
+          </div>
+          <i class="bi bi-car-front-fill absolute -right-4 -bottom-8 text-7xl sm:text-9xl lg:text-[12rem] opacity-10 transform -rotate-6"></i>
+        </div>
+
+        <!-- Stat Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          <div class="bg-white dark:bg-slate-800 p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover-scale">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="text-amber-500 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider">Total Keys</p>
+                <h3 class="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white mt-1">342</h3>
+              </div>
+              <div class="bg-amber-100 dark:bg-amber-500/20 p-1.5 sm:p-2 rounded-lg"><i class="bi bi-key text-amber-600 dark:text-amber-400 text-lg sm:text-xl"></i></div>
+            </div>
+            <p class="text-xs text-emerald-600 dark:text-emerald-400 mt-2 sm:mt-3 font-medium"><i class="bi bi-arrow-up-right"></i> 22% vs last month</p>
+          </div>
+
+          <div class="bg-white dark:bg-slate-800 p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover-scale">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="text-amber-500 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider">Active Fobs</p>
+                <h3 class="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white mt-1">127</h3>
+              </div>
+              <div class="bg-blue-100 dark:bg-blue-500/20 p-1.5 sm:p-2 rounded-lg"><i class="bi bi-wifi text-blue-600 dark:text-blue-400 text-lg sm:text-xl"></i></div>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 sm:mt-3 font-medium">12 new this week</p>
+          </div>
+
+          <div class="bg-white dark:bg-slate-800 p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover-scale">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="text-amber-500 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider">Techs Online</p>
+                <h3 class="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white mt-1">8</h3>
+              </div>
+              <div class="bg-purple-100 dark:bg-purple-500/20 p-1.5 sm:p-2 rounded-lg"><i class="bi bi-person-badge text-purple-600 dark:text-purple-400 text-lg sm:text-xl"></i></div>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 sm:mt-3 font-medium">3 available for dispatch</p>
+          </div>
+
+          <div class="bg-white dark:bg-slate-800 p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover-scale">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="text-amber-500 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider">Revenue</p>
+                <h3 class="text-2xl sm:text-3xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">$18k</h3>
+              </div>
+              <div class="bg-emerald-100 dark:bg-emerald-500/20 p-1.5 sm:p-2 rounded-lg"><i class="bi bi-currency-dollar text-emerald-600 dark:text-emerald-400 text-lg sm:text-xl"></i></div>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 sm:mt-3 font-medium">From key services</p>
+          </div>
+        </div>
+
+        <!-- Activity & Services -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
+          <div class="bg-white dark:bg-slate-800 p-4 sm:p-5 lg:p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <div class="flex justify-between items-center mb-4 sm:mb-5">
+              <h3 class="font-bold text-sm sm:text-base text-slate-800 dark:text-white flex items-center gap-2"><i class="bi bi-clock-history text-amber-500"></i> Recent Requests</h3>
+              <a href="#" class="text-xs sm:text-sm text-amber-600 dark:text-amber-400 hover:underline">View all</a>
+            </div>
+            <div class="space-y-3 sm:space-y-4">
+              <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-700/50 pb-2 sm:pb-3">
+                <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+                  <div class="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 shrink-0"><i class="bi bi-car-front text-sm sm:text-base"></i></div>
+                  <div class="min-w-0"><p class="text-xs sm:text-sm font-semibold text-slate-800 dark:text-white truncate">BMW X5</p><p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 truncate">Key fob replacement</p></div>
+                </div>
+                <span class="text-[10px] sm:text-xs text-slate-400 bg-slate-50 dark:bg-slate-700 px-2 sm:px-2.5 py-1 rounded-md shrink-0">2h ago</span>
+              </div>
+              <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-700/50 pb-2 sm:pb-3">
+                <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+                  <div class="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 shrink-0"><i class="bi bi-car-front text-sm sm:text-base"></i></div>
+                  <div class="min-w-0"><p class="text-xs sm:text-sm font-semibold text-slate-800 dark:text-white truncate">Toyota Camry</p><p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 truncate">Transponder programming</p></div>
+                </div>
+                <span class="text-[10px] sm:text-xs text-slate-400 bg-slate-50 dark:bg-slate-700 px-2 sm:px-2.5 py-1 rounded-md shrink-0">Yesterday</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+                  <div class="w-8 sm:w-10 h-8 sm:h-10 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 shrink-0"><i class="bi bi-truck text-sm sm:text-base"></i></div>
+                  <div class="min-w-0"><p class="text-xs sm:text-sm font-semibold text-slate-800 dark:text-white truncate">Ford F-150</p><p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 truncate">Remote start install</p></div>
+                </div>
+                <span class="text-[10px] sm:text-xs text-slate-400 bg-slate-50 dark:bg-slate-700 px-2 sm:px-2.5 py-1 rounded-md shrink-0">3 days ago</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-white dark:bg-slate-800 p-4 sm:p-5 lg:p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <div class="flex justify-between items-center mb-4 sm:mb-5">
+              <h3 class="font-bold text-sm sm:text-base text-slate-800 dark:text-white flex items-center gap-2"><i class="bi bi-tools text-amber-500"></i> Active Services</h3>
+            </div>
+            <div class="space-y-3 sm:space-y-4">
+              <div class="bg-slate-50 dark:bg-slate-700/50 p-3 sm:p-4 rounded-xl flex justify-between items-center gap-2 border border-slate-100 dark:border-slate-700">
+                <div class="min-w-0"><span class="block text-xs sm:text-sm font-semibold text-slate-800 dark:text-white truncate">Mercedes C-Class</span><span class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 truncate">Key programming</span></div>
+                <div class="text-right shrink-0"><span class="block font-bold text-sm sm:text-base text-emerald-600 dark:text-emerald-400">$245</span><span class="text-[9px] sm:text-[10px] uppercase text-slate-400">In Progress</span></div>
+              </div>
+              <div class="bg-slate-50 dark:bg-slate-700/50 p-3 sm:p-4 rounded-xl flex justify-between items-center gap-2 border border-slate-100 dark:border-slate-700">
+                <div class="min-w-0"><span class="block text-xs sm:text-sm font-semibold text-slate-800 dark:text-white truncate">Honda Accord</span><span class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 truncate">Fob replacement</span></div>
+                <div class="text-right shrink-0"><span class="block font-bold text-sm sm:text-base text-emerald-600 dark:text-emerald-400">$180</span><span class="text-[9px] sm:text-[10px] uppercase text-slate-400">Dispatched</span></div>
+              </div>
+              <div class="bg-slate-50 dark:bg-slate-700/50 p-3 sm:p-4 rounded-xl flex justify-between items-center gap-2 border border-slate-100 dark:border-slate-700">
+                <div class="min-w-0"><span class="block text-xs sm:text-sm font-semibold text-slate-800 dark:text-white truncate">Audi A4</span><span class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 truncate">Key duplication</span></div>
+                <div class="text-right shrink-0"><span class="block font-bold text-sm sm:text-base text-emerald-600 dark:text-emerald-400">$95</span><span class="text-[9px] sm:text-[10px] uppercase text-slate-400">Pending</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: UPLOAD & VISUALIZE -->
+      <div id="section-upload-visualize" class="content-section hidden space-y-5 sm:space-y-6 max-w-5xl mx-auto px-2 sm:px-0">
+        <div class="mb-6 sm:mb-8">
+          <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-800 dark:text-white">Key Upload & Visualizer</h2>
+          <p class="text-slate-500 dark:text-slate-400 mt-1 sm:mt-2 text-xs sm:text-sm lg:text-base">Upload key/fob photos, get instant quotes, and schedule mobile service.</p>
+        </div>
+        
+        <div class="grid lg:grid-cols-2 gap-5 sm:gap-6 lg:gap-8">
+          <!-- Upload Card -->
+          <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-5 lg:p-6 shadow-sm border border-slate-200 dark:border-slate-700">
+            <h3 class="font-bold mb-3 sm:mb-4 flex items-center gap-2 text-slate-800 dark:text-white text-sm sm:text-base"><i class="bi bi-camera text-amber-500"></i> Capture Key Image</h3>
+            <div class="bg-slate-50 dark:bg-slate-900/50 rounded-xl min-h-[160px] sm:min-h-[200px] lg:h-56 flex flex-col items-center justify-center border-2 border-dashed border-amber-300 dark:border-slate-600 cursor-pointer hover:bg-amber-50 dark:hover:bg-slate-700/50 transition-colors group px-3 sm:px-4">
+              <i class="bi bi-cloud-arrow-up text-3xl sm:text-4xl lg:text-5xl text-amber-400 dark:text-amber-500 group-hover:-translate-y-2 transition-transform"></i>
+              <span class="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-300 mt-2 sm:mt-3 text-center">Drag & drop or click to upload</span>
+              <span class="text-[10px] sm:text-xs text-slate-400 mt-1 text-center">Supports JPG, PNG (Max 5MB)</span>
+            </div>
+            <button class="mt-4 sm:mt-5 bg-amber-500 hover:bg-amber-600 text-white px-4 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-semibold w-full transition shadow-lg shadow-amber-500/20">
+              Browse Files
+            </button>
+          </div>
+
+          <!-- Quote Card -->
+          <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-5 lg:p-6 shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col">
+            <h3 class="font-bold mb-3 sm:mb-4 flex items-center gap-2 text-slate-800 dark:text-white text-sm sm:text-base"><i class="bi bi-magic text-amber-500"></i> AI Analysis & Quote</h3>
+            <div class="bg-slate-50 dark:bg-slate-900/50 rounded-xl min-h-[100px] sm:min-h-[120px] lg:h-32 flex flex-col items-center justify-center border border-slate-200 dark:border-slate-700 mb-4 sm:mb-5">
+              <i class="bi bi-robot text-2xl sm:text-3xl lg:text-4xl text-slate-400 dark:text-slate-500 mb-1 sm:mb-2"></i>
+              <span class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Awaiting image upload...</span>
+            </div>
+            
+            <div class="mt-auto space-y-3 sm:space-y-4">
+              <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                <select class="border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 rounded-xl p-2.5 sm:p-3 text-xs sm:text-sm flex-1 text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-amber-500 outline-none">
+                  <option>Select Key Type (Manual Override)</option>
+                  <option>Transponder chip</option>
+                  <option>Remote fob</option>
+                  <option>Smart key</option>
+                  <option>Proximity fob</option>
+                </select>
+                
+              </div>
+              <button class="w-full border-2 border-amber-500 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-bold text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-500/10 transition">
+                Schedule Mobile Service
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-amber-50 dark:bg-amber-500/10 p-3 sm:p-4 lg:p-5 rounded-xl flex gap-2 sm:gap-3 lg:gap-4 items-start border border-amber-200 dark:border-amber-500/20">
+          <i class="bi bi-info-circle-fill text-amber-500 mt-0.5 text-sm sm:text-base lg:text-lg shrink-0"></i>
+          <span class="text-[10px] sm:text-xs lg:text-sm text-amber-800 dark:text-amber-200 leading-relaxed">
+            <strong>Pro Tip:</strong> Upload a clear, well-lit photo of the key or fob. Our AI system will automatically identify the blade type, button configuration, and internal chip requirements to provide the most accurate instant price quote.
+          </span>
+        </div>
+      </div>
+
+      <!-- SECTION 3: KEY TYPE LIBRARY -->
+      <div id="section-style-gallery" class="content-section hidden space-y-5 sm:space-y-6 max-w-7xl mx-auto">
+        <div class="mb-6 sm:mb-8">
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white">Key Type Library</h2>
+          <p class="text-slate-500 dark:text-slate-400 mt-1 sm:mt-2 text-sm sm:text-base">Browse supported key and fob types. Quick reference for programming and replacement hardware.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+          <!-- Card 1 -->
+          <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700 hover-scale group cursor-pointer">
+            <div class="h-32 sm:h-40 bg-slate-100 dark:bg-slate-700/50 flex items-center justify-center group-hover:bg-amber-50 dark:group-hover:bg-slate-700 transition-colors">
+              <i class="bi bi-key text-4xl sm:text-5xl lg:text-6xl text-slate-400 group-hover:text-amber-500 transition-colors"></i>
+            </div>
+            <div class="p-4 sm:p-5">
+              <h3 class="font-bold text-base sm:text-lg text-slate-800 dark:text-white">Transponder Chip</h3>
+              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Standard chip · 40-bit / 80-bit</p>
+              <div class="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-slate-100 dark:border-slate-700 flex justify-between items-center">
+                <span class="text-[10px] sm:text-xs font-semibold px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-slate-600 dark:text-slate-300">In Stock: 145</span>
+                <button class="text-xs sm:text-sm text-amber-600 dark:text-amber-400 font-bold hover:text-amber-700 transition">View details &rarr;</button>
+              </div>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700 hover-scale group cursor-pointer">
+            <div class="h-32 sm:h-40 bg-slate-100 dark:bg-slate-700/50 flex items-center justify-center group-hover:bg-amber-50 dark:group-hover:bg-slate-700 transition-colors">
+              <i class="bi bi-wifi text-4xl sm:text-5xl lg:text-6xl text-slate-400 group-hover:text-amber-500 transition-colors"></i>
+            </div>
+            <div class="p-4 sm:p-5">
+              <h3 class="font-bold text-base sm:text-lg text-slate-800 dark:text-white">Proximity Fob</h3>
+              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Smart access · 315MHz / 433MHz</p>
+              <div class="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-slate-100 dark:border-slate-700 flex justify-between items-center">
+                <span class="text-[10px] sm:text-xs font-semibold px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-slate-600 dark:text-slate-300">In Stock: 82</span>
+                <button class="text-xs sm:text-sm text-amber-600 dark:text-amber-400 font-bold hover:text-amber-700 transition">View details &rarr;</button>
+              </div>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700 hover-scale group cursor-pointer">
+            <div class="h-32 sm:h-40 bg-slate-100 dark:bg-slate-700/50 flex items-center justify-center group-hover:bg-amber-50 dark:group-hover:bg-slate-700 transition-colors">
+              <i class="bi bi-bluetooth text-4xl sm:text-5xl lg:text-6xl text-slate-400 group-hover:text-amber-500 transition-colors"></i>
+            </div>
+            <div class="p-4 sm:p-5">
+              <h3 class="font-bold text-base sm:text-lg text-slate-800 dark:text-white">Smart Key</h3>
+              <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Advanced Bluetooth · NFC</p>
+              <div class="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-slate-100 dark:border-slate-700 flex justify-between items-center">
+                <span class="text-[10px] sm:text-xs font-semibold px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded text-slate-600 dark:text-slate-300">In Stock: 34</span>
+                <button class="text-xs sm:text-sm text-amber-600 dark:text-amber-400 font-bold hover:text-amber-700 transition">View details &rarr;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 4: PRICE MATRIX -->
+      <div id="section-furniture-catalog" class="content-section hidden space-y-5 sm:space-y-6 max-w-7xl mx-auto">
+        <div class="flex flex-wrap justify-between items-end gap-3 sm:gap-4 mb-4">
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white">Price Matrix</h2>
+            <p class="text-slate-500 dark:text-slate-400 mt-1 sm:mt-2 text-sm sm:text-base">Manage base key pricing, programming fees, and mobile service bundles.</p>
+          </div>
+          <button class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl text-xs sm:text-sm font-semibold shadow-lg shadow-amber-500/20 transition flex items-center gap-2">
+            <i class="bi bi-plus-lg"></i> Add Price Tier
+          </button>
+        </div>
+
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+              <thead class="bg-slate-50 dark:bg-slate-700/50 text-[10px] sm:text-xs uppercase font-bold text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700">
+                <tr>
+                  <th scope="col" class="px-3 sm:px-6 py-3 sm:py-4">Service Type</th>
+                  <th scope="col" class="px-3 sm:px-6 py-3 sm:py-4">Hardware Cost</th>
+                  <th scope="col" class="px-3 sm:px-6 py-3 sm:py-4">Programming</th>
+                  <th scope="col" class="px-3 sm:px-6 py-3 sm:py-4">Total Price</th>
+                  <th scope="col" class="px-3 sm:px-6 py-3 sm:py-4 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 dark:divide-slate-700/50">
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/20 transition-colors">
+                  <td class="px-3 sm:px-6 py-3 sm:py-4">
+                    <div class="flex items-center gap-2 sm:gap-3">
+                      <div class="w-6 sm:w-8 h-6 sm:h-8 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0"><i class="bi bi-key text-xs sm:text-base"></i></div>
+                      <span class="font-semibold text-slate-800 dark:text-white text-xs sm:text-sm">Standard Chip Key</span>
+                    </div>
+                  </td>
+                  <td class="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">$25.00</td>
+                  <td class="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">$60.00</td>
+                  <td class="px-3 sm:px-6 py-3 sm:py-4 font-bold text-slate-800 dark:text-white whitespace-nowrap">$85.00</td>
+                  <td class="px-3 sm:px-6 py-3 sm:py-4 text-right whitespace-nowrap">
+                    <button class="text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 font-medium text-xs sm:text-sm">Edit</button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/20 transition-colors">
+                  <td class="px-3 sm:px-6 py-3 sm:py-4">
+                    <div class="flex items-center gap-2 sm:gap-3">
+                      <div class="w-6 sm:w-8 h-6 sm:h-8 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0"><i class="bi bi-wifi text-xs sm:text-base"></i></div>
+                      <span class="font-semibold text-slate-800 dark:text-white text-xs sm:text-sm">Proximity Fob</span>
+                    </div>
+                  </td>
+                  <td class="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">$69.00</td>
+                  <td class="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">$80.00</td>
+                  <td class="px-3 sm:px-6 py-3 sm:py-4 font-bold text-slate-800 dark:text-white whitespace-nowrap">$149.00</td>
+                  <td class="px-3 sm:px-6 py-3 sm:py-4 text-right whitespace-nowrap">
+                    <button class="text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 font-medium text-xs sm:text-sm">Edit</button>
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/20 transition-colors">
+                  <td class="px-3 sm:px-6 py-3 sm:py-4">
+                    <div class="flex items-center gap-2 sm:gap-3">
+                      <div class="w-6 sm:w-8 h-6 sm:h-8 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0"><i class="bi bi-bluetooth text-xs sm:text-base"></i></div>
+                      <span class="font-semibold text-slate-800 dark:text-white text-xs sm:text-sm">Smart Key (Premium)</span>
+                    </div>
+                  </td>
+                  <td class="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">$110.00</td>
+                  <td class="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">$120.00</td>
+                  <td class="px-3 sm:px-6 py-3 sm:py-4 font-bold text-slate-800 dark:text-white whitespace-nowrap">$230.00</td>
+                  <td class="px-3 sm:px-6 py-3 sm:py-4 text-right whitespace-nowrap">
+                    <button class="text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 font-medium text-xs sm:text-sm">Edit</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 5: SERVICE HISTORY -->
+      <div id="section-clients" class="content-section hidden space-y-5 sm:space-y-6 max-w-7xl mx-auto">
+        <div class="mb-4 sm:mb-6">
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white">Service History & Records</h2>
+          <p class="text-slate-500 dark:text-slate-400 mt-1 sm:mt-2 text-sm sm:text-base">Track customer key service history, cut code records, and technician assignments.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          <!-- Client 1 -->
+          <div class="bg-white dark:bg-slate-800 p-4 sm:p-5 lg:p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <div class="flex justify-between items-start gap-2">
+              <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                <div class="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-base sm:text-xl text-slate-400 shrink-0">LP</div>
+                <div class="min-w-0">
+                  <p class="font-bold text-sm sm:text-lg text-slate-800 dark:text-white leading-tight truncate">Linda Park</p>
+                  <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5 sm:mt-1 truncate">BMW X5 · Key Fob</p>
+                </div>
+              </div>
+              <span class="text-[10px] sm:text-xs font-bold bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full shrink-0">Completed</span>
+            </div>
+            <div class="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-slate-100 dark:border-slate-700 flex gap-2 sm:gap-3">
+              <button class="flex-1 text-xs sm:text-sm border-2 border-slate-200 dark:border-slate-600 rounded-xl py-2 sm:py-2.5 font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition">View Code</button>
+              <button class="flex-1 text-xs sm:text-sm bg-slate-800 dark:bg-slate-600 hover:bg-slate-700 dark:hover:bg-slate-500 text-white rounded-xl py-2 sm:py-2.5 font-semibold transition">Receipt</button>
+            </div>
+          </div>
+
+          <!-- Client 2 -->
+          <div class="bg-white dark:bg-slate-800 p-4 sm:p-5 lg:p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <div class="flex justify-between items-start gap-2">
+              <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                <div class="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-base sm:text-xl text-slate-400 shrink-0">DC</div>
+                <div class="min-w-0">
+                  <p class="font-bold text-sm sm:text-lg text-slate-800 dark:text-white leading-tight truncate">David Chen</p>
+                  <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5 sm:mt-1 truncate">Toyota Camry · Transponder</p>
+                </div>
+              </div>
+              <span class="text-[10px] sm:text-xs font-bold bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-400 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full shrink-0">In Progress</span>
+            </div>
+            <div class="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-slate-100 dark:border-slate-700 flex gap-2 sm:gap-3">
+              <button class="flex-1 text-xs sm:text-sm border-2 border-slate-200 dark:border-slate-600 rounded-xl py-2 sm:py-2.5 font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition">Tech Status</button>
+              <button class="flex-1 text-xs sm:text-sm bg-amber-500 hover:bg-amber-600 text-white rounded-xl py-2 sm:py-2.5 font-semibold shadow-lg shadow-amber-500/20 transition">Track Job</button>
+            </div>
+          </div>
+
+          <!-- Client 3 -->
+          <div class="bg-white dark:bg-slate-800 p-4 sm:p-5 lg:p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <div class="flex justify-between items-start gap-2">
+              <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                <div class="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-base sm:text-xl text-slate-400 shrink-0">SJ</div>
+                <div class="min-w-0">
+                  <p class="font-bold text-sm sm:text-lg text-slate-800 dark:text-white leading-tight truncate">Sarah Johnson</p>
+                  <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5 sm:mt-1 truncate">Ford F-150 · Remote Start</p>
+                </div>
+              </div>
+              <span class="text-[10px] sm:text-xs font-bold bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full shrink-0">Scheduled</span>
+            </div>
+            <div class="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-slate-100 dark:border-slate-700 flex gap-2 sm:gap-3">
+              <button class="flex-1 text-xs sm:text-sm border-2 border-slate-200 dark:border-slate-600 rounded-xl py-2 sm:py-2.5 font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition">Reschedule</button>
+              <button class="flex-1 text-xs sm:text-sm bg-amber-500 hover:bg-amber-600 text-white rounded-xl py-2 sm:py-2.5 font-semibold shadow-lg shadow-amber-500/20 transition">Dispatch</button>
+            </div>
+          </div>
+
+          <!-- Client 4 -->
+          <div class="bg-white dark:bg-slate-800 p-4 sm:p-5 lg:p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700">
+            <div class="flex justify-between items-start gap-2">
+              <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                <div class="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-base sm:text-xl text-slate-400 shrink-0">MT</div>
+                <div class="min-w-0">
+                  <p class="font-bold text-sm sm:text-lg text-slate-800 dark:text-white leading-tight truncate">Michael Torres</p>
+                  <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5 sm:mt-1 truncate">Audi A4 · Smart Key</p>
+                </div>
+              </div>
+              <span class="text-[10px] sm:text-xs font-bold bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-400 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full shrink-0">Code Ready</span>
+            </div>
+            <div class="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-slate-100 dark:border-slate-700 flex gap-2 sm:gap-3">
+              <button class="flex-1 text-xs sm:text-sm border-2 border-slate-200 dark:border-slate-600 rounded-xl py-2 sm:py-2.5 font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition">Get Code</button>
+              <button class="flex-1 text-xs sm:text-sm bg-amber-500 hover:bg-amber-600 text-white rounded-xl py-2 sm:py-2.5 font-semibold shadow-lg shadow-amber-500/20 transition">Notify Client</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script>
+  // Tab Switching Logic
+  function showSection(sectionId) {
+    document.querySelectorAll('.content-section').forEach(el => el.classList.add('hidden'));
+    const target = document.getElementById('section-' + sectionId);
+    if (target) target.classList.remove('hidden');
+
+    const titles = {
+      'dashboard': 'Admin Dashboard',
+      'upload-visualize': 'Key Upload & Visualize',
+      'style-gallery': 'Key Type Library',
+      'furniture-catalog': 'Price Matrix',
+      'clients': 'Service History'
+    };
+    const titleEl = document.getElementById('page-title');
+    if (titleEl) titleEl.innerText = titles[sectionId] || 'Admin Dashboard';
+
+    document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+    const activeLink = document.querySelector(`.nav-link[onclick*="${sectionId}"]`);
+    if (activeLink) activeLink.classList.add('active');
+
+    if (window.innerWidth < 1024) closeSidebar();
+  }
+
+  // Sidebar Logic
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  
+  function openSidebar() { 
+    sidebar.classList.remove("-translate-x-full"); 
+    overlay.classList.remove("hidden"); 
+    document.body.style.overflow = 'hidden'; 
+  }
+  
+  function closeSidebar() { 
+    sidebar.classList.add("-translate-x-full"); 
+    overlay.classList.add("hidden"); 
+    document.body.style.overflow = ''; 
+  }
+  
+  document.getElementById("openSidebar")?.addEventListener('click', openSidebar);
+  document.getElementById("closeSidebar")?.addEventListener('click', closeSidebar);
+  overlay?.addEventListener('click', closeSidebar);
+
+  // Profile Dropdown Toggle (works on touch & mouse)
+  document.getElementById("profileBtn")?.addEventListener('click', function(e) {
+    e.stopPropagation();
+    document.getElementById("profileMenu")?.classList.toggle("hidden");
+  });
+  document.addEventListener('click', function(e) {
+    const dd = document.getElementById("profileDropdown");
+    if (dd && !dd.contains(e.target)) {
+      document.getElementById("profileMenu")?.classList.add("hidden");
+    }
+  });
+
+  // Theme Logic (Tailwind dark mode class toggler)
+  function toggleTheme() {
+    document.documentElement.classList.toggle("dark");
+    const isDark = document.documentElement.classList.contains("dark");
+    const iconClass = isDark ? "bi bi-sun-fill" : "bi bi-moon-fill";
+    
+    const desktopIcon = document.getElementById("themeIconDesktop");
+    const mobileIcon = document.getElementById("themeIconMobile");
+    
+    if (desktopIcon) desktopIcon.className = iconClass;
+    if (mobileIcon) mobileIcon.className = iconClass;
+  }
+
+  // RTL Logic
+  function toggleRTL() {
+    document.documentElement.dir = document.documentElement.dir === "rtl" ? "ltr" : "rtl";
+  }
+
+  // Initialize
+  showSection('dashboard');
+  window.addEventListener('resize', () => { 
+    if (window.innerWidth >= 1024) closeSidebar(); 
+  });
+</script>
+</body>
+</html>

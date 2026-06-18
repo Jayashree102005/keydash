@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home1 - KeyDash</title>
+  <link rel="icon" href="images/logo.jpeg">
+  <script src="tailwind.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* RTL */
+    .rtl {
+      direction: rtl;
+    }
+
+    [dir="rtl"] .title {
+      margin-right: 20px !important;
+    }
+
+    /* THEME TOGGLE */
+    :root {
+      --home-bg: #ffffff;
+      --text-color: #111111;
+    }
+
+    [data-theme="dark"] {
+      --home-bg: #000000;
+      --text-color: #ffffff;
+    }
+
+    body {
+      background-color: var(--home-bg) !important;
+      color: var(--text-color);
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    [data-theme="dark"] section,
+    [data-theme="dark"] .card {
+      background-color: #111111 !important;
+      border-color: #333333 !important;
+    }
+
+    [data-theme="dark"] .btn,
+    [data-theme="dark"] .btn1:hover {
+      color: #000000 !important;
+    }
+
+    [data-theme="dark"] body,
+    [data-theme="dark"] p,
+    [data-theme="dark"] h1,
+    [data-theme="dark"] h2,
+    [data-theme="dark"] h3,
+    [data-theme="dark"] h4,
+    [data-theme="dark"] h5,
+    [data-theme="dark"] h6,
+    [data-theme="dark"] span,
+    [data-theme="dark"] li,
+    [data-theme="dark"] a,
+    [data-theme="dark"] label,
+    [data-theme="dark"] small,
+    [data-theme="dark"] strong,
+    [data-theme="dark"] .title {
+      color: #ffffff !important;
+    }
+
+    /* ===== HOME PAGE DARK MODE OVERRIDES ===== */
+
+    /* main wrapper */
+    [data-theme="dark"] main {
+      background-color: #111111 !important;
+    }
+
+    /* bg-white & bg-slate-50 sections */
+    [data-theme="dark"] .bg-white,
+    [data-theme="dark"] .bg-slate-50 {
+      background-color: #111111 !important;
+    }
+
+    /* Service cards & testimonial cards */
+    [data-theme="dark"] .bg-white.rounded-2xl,
+    [data-theme="dark"] .bg-slate-50.rounded-3xl,
+    [data-theme="dark"] .bg-slate-50.p-8 {
+      background-color: #1a1a1a !important;
+      border-color: #2a2a2a !important;
+    }
+
+    /* Service card icon containers (bg-amber-50) */
+    [data-theme="dark"] .bg-amber-50 {
+      background-color: #2a1f00 !important;
+    }
+
+    /* How-it-works step cards */
+    [data-theme="dark"] .bg-white.lg\:bg-transparent {
+      background-color: #1a1a1a !important;
+      border-color: #2a2a2a !important;
+    }
+
+    /* Customer portal: feature list hover */
+    [data-theme="dark"] li:hover.hover\:bg-slate-50 {
+      background-color: #1f1f1f !important;
+    }
+
+    /* "Explore Dashboard" outlined button */
+    [data-theme="dark"] a.border-slate-900.text-slate-900 {
+      border-color: #ffffff !important;
+      color: #ffffff !important;
+    }
+    [data-theme="dark"] a.border-slate-900.text-slate-900:hover {
+      background-color: #ffffff !important;
+      color: #111111 !important;
+    }
+
+    /* Trust badges row */
+    [data-theme="dark"] .text-slate-800 {
+      color: #e2e8f0 !important;
+    }
+
+    /* Testimonial quote icon (bi-quote) */
+    [data-theme="dark"] .text-slate-200 {
+      color: #2a2a2a !important;
+    }
+
+    /* Border overrides for separator lines */
+    [data-theme="dark"] .border-slate-100,
+    [data-theme="dark"] .border-slate-200 {
+      border-color: #2a2a2a !important;
+    }
+
+    /* Customer portal security badge (floating card) */
+    [data-theme="dark"] .bg-white.p-4.rounded-xl {
+      background-color: #1a1a1a !important;
+      border-color: #2a2a2a !important;
+    }
+
+    /* Subtext colors */
+    [data-theme="dark"] .text-slate-500,
+    [data-theme="dark"] .text-slate-600 {
+      color: #9ca3af !important;
+    }
+
+    [data-theme="dark"] .text-slate-900 {
+      color: #f1f5f9 !important;
+    }
+
+    [data-theme="dark"] .text-slate-300 {
+      color: #cbd5e1 !important;
+    }
+
+    [data-theme="dark"] .text-slate-400 {
+      color: #94a3b8 !important;
+    }
+
+    /* "Emergency Call" white button in CTA */
+    [data-theme="dark"] a.bg-white.text-slate-900 {
+      background-color: #1a1a1a !important;
+      color: #ffffff !important;
+      border: 1px solid #333333 !important;
+    }
+    [data-theme="dark"] a.bg-white.text-slate-900:hover {
+      background-color: #2a2a2a !important;
+    }
+  </style>
+</head>
+
+<body class="font-sans">
+  <!-- navbar -->
+  <div id="navbar"></div>
+  <!-- HERO BANNER -->
+   <style>
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+  .animate-float { animation: float 4s ease-in-out infinite; }
+  .animate-float-delayed { animation: float 4s ease-in-out infinite; animation-delay: 2s; }
+  
+  /* Scroll Reveal Base Classes */
+  .js-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .js-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<main class="w-full bg-white overflow-hidden font-sans">
+
+  <section class="relative min-h-[90vh] flex items-center justify-center pt-24 pb-16 lg:pt-32 lg:pb-24">
+    <div class="absolute inset-0 bg-[url('images/img1.jpg')] bg-cover bg-center bg-no-repeat"></div>
+    <div class="absolute inset-0 bg-slate-900/85"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+      
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F59E0B]/10 text-[#F59E0B] border border-[#F59E0B]/30 font-semibold text-sm mb-6 backdrop-blur-sm">
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-[#F59E0B]"></span>
+          24/7 Mobile Locksmith Service
+        </div>
+        
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight">
+          Fast Mobile Car Key <span class="text-[#F59E0B]">Replacement</span> & Fob Programming
+        </h1>
+        
+        <p class="mt-6 text-lg md:text-xl text-slate-300 leading-relaxed">
+          Lost your car keys or dealing with a faulty key fob? Our certified mobile technicians come directly to your location for key cutting, transponder programming, remote replacement, and emergency lockout assistance.
+        </p>
+
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="quote.html" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#F59E0B] text-white text-lg font-bold hover:bg-[#D97706] shadow-lg shadow-[#F59E0B]/25">
+            Get Instant Quote
+          </a>
+          <a href="schedule.html" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/10 text-white border border-white/20 text-lg font-bold hover:bg-white/20 backdrop-blur-md">
+            Schedule Service
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass-card bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center">
+          <h3 class="text-3xl font-extrabold text-[#F59E0B] mb-2">15+ Years</h3>
+          <p class="text-slate-300 font-medium text-sm">Experience</p>
+        </div>
+        <div class="glass-card bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center">
+          <h3 class="text-3xl font-extrabold text-[#F59E0B] mb-2">5,000+</h3>
+          <p class="text-slate-300 font-medium text-sm">Keys Programmed</p>
+        </div>
+        <div class="glass-card bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center">
+          <h3 class="text-3xl font-extrabold text-[#F59E0B] mb-2">30-Min</h3>
+          <p class="text-slate-300 font-medium text-sm">Avg Response Time</p>
+        </div>
+        <div class="glass-card bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-center">
+          <h3 class="text-3xl font-extrabold text-[#F59E0B] mb-2">24/7</h3>
+          <p class="text-slate-300 font-medium text-sm">Emergency Support</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-24 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Expert Solutions</h2>
+        <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900">Our Locksmith Services</h3>
+        <p class="mt-4 text-slate-500 text-lg">Comprehensive automotive key solutions delivered directly to your vehicle's location.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl border border-slate-100 hover:border-[#F59E0B]/30">
+          <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-2xl mb-6">
+            <i class="bi bi-key-fill"></i>
+          </div>
+          <h4 class="text-xl font-bold text-slate-900 mb-3">Car Key Replacement</h4>
+          <p class="text-slate-500 mb-6 line-clamp-3">Lost your only key? We generate and cut precise replacements on-site for almost all makes and models without needing the original.</p>
+          <a href="#" class="text-[#F59E0B] font-bold hover:text-[#D97706] inline-flex items-center gap-2">
+            Learn More <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl border border-slate-100 hover:border-[#F59E0B]/30">
+          <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-2xl mb-6">
+            <i class="bi bi-broadcast"></i>
+          </div>
+          <h4 class="text-xl font-bold text-slate-900 mb-3">Key Fob Programming</h4>
+          <p class="text-slate-500 mb-6 line-clamp-3">Advanced syncing and programming for smart proximity fobs, keyless entry remotes, and push-to-start systems.</p>
+          <a href="#" class="text-[#F59E0B] font-bold hover:text-[#D97706] inline-flex items-center gap-2">
+            Learn More <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl border border-slate-100 hover:border-[#F59E0B]/30">
+          <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-2xl mb-6">
+            <i class="bi bi-files"></i>
+          </div>
+          <h4 class="text-xl font-bold text-slate-900 mb-3">Transponder Duplicate</h4>
+          <p class="text-slate-500 mb-6 line-clamp-3">Need a spare? We clone and program chipped transponder keys to ensure your vehicle's immobilizer recognizes the duplicate.</p>
+          <a href="#" class="text-[#F59E0B] font-bold hover:text-[#D97706] inline-flex items-center gap-2">
+            Learn More <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl border border-slate-100 hover:border-[#F59E0B]/30">
+          <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-2xl mb-6">
+            <i class="bi bi-wrench-adjustable"></i>
+          </div>
+          <h4 class="text-xl font-bold text-slate-900 mb-3">Broken Key Extraction</h4>
+          <p class="text-slate-500 mb-6 line-clamp-3">Safely removing broken blades from ignitions or door locks without causing damage to the internal lock cylinders.</p>
+          <a href="#" class="text-[#F59E0B] font-bold hover:text-[#D97706] inline-flex items-center gap-2">
+            Learn More <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl border border-slate-100 hover:border-[#F59E0B]/30">
+          <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-2xl mb-6">
+            <i class="bi bi-unlock-fill"></i>
+          </div>
+          <h4 class="text-xl font-bold text-slate-900 mb-3">Emergency Lockouts</h4>
+          <p class="text-slate-500 mb-6 line-clamp-3">Locked out of your car? Our damage-free entry techniques get you back in the driver's seat safely and quickly.</p>
+          <a href="#" class="text-[#F59E0B] font-bold hover:text-[#D97706] inline-flex items-center gap-2">
+            Learn More <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl border border-slate-100 hover:border-[#F59E0B]/30">
+          <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-2xl mb-6">
+            <i class="bi bi-car-front-fill"></i>
+          </div>
+          <h4 class="text-xl font-bold text-slate-900 mb-3">Ignition Repair</h4>
+          <p class="text-slate-500 mb-6 line-clamp-3">Key won't turn? We rebuild, repair, or completely replace seized and faulty ignition cylinders directly on-site.</p>
+          <a href="#" class="text-[#F59E0B] font-bold hover:text-[#D97706] inline-flex items-center gap-2">
+            Learn More <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col lg:flex-row items-center gap-16">
+        
+        <div class="w-full lg:w-1/2 relative">
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-[#F59E0B]/20 rounded-full blur-3xl"></div>
+          <img 
+            src="images/img2.avif" 
+            alt="Customer Dashboard Mockup" 
+            class="relative z-10 rounded-2xl shadow-2xl border border-slate-100"
+          >
+        </div>
+
+        <div class="w-full lg:w-1/2">
+          <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Customer Portal</h2>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight mb-6">
+            Manage Your Keys From A Powerful Dashboard
+          </h3>
+          <p class="text-slate-500 text-lg mb-8">
+            Create an account to gain full control over your automotive security. Upload photos, track history, and request services instantly.
+          </p>
+
+          <ul class="space-y-4">
+            <li class="flex items-start gap-4 p-3 hover:bg-slate-50 rounded-xl">
+              <i class="bi bi-check-circle-fill text-[#F59E0B] text-xl mt-0.5"></i>
+              <div>
+                <strong class="block text-slate-900">Upload key type photos for identification</strong>
+                <span class="text-slate-500 text-sm">Snap a picture and get an accurate quote.</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-4 p-3 hover:bg-slate-50 rounded-xl">
+              <i class="bi bi-check-circle-fill text-[#F59E0B] text-xl mt-0.5"></i>
+              <div>
+                <strong class="block text-slate-900">Track technician arrival status</strong>
+                <span class="text-slate-500 text-sm">Real-time GPS tracking for your scheduled tech.</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-4 p-3 hover:bg-slate-50 rounded-xl">
+              <i class="bi bi-check-circle-fill text-[#F59E0B] text-xl mt-0.5"></i>
+              <div>
+                <strong class="block text-slate-900">Access saved key code information</strong>
+                <span class="text-slate-500 text-sm">Store key codes securely for faster future replacements.</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-4 p-3 hover:bg-slate-50 rounded-xl">
+              <i class="bi bi-check-circle-fill text-[#F59E0B] text-xl mt-0.5"></i>
+              <div>
+                <strong class="block text-slate-900">Manage multiple vehicles</strong>
+                <span class="text-slate-500 text-sm">Perfect for families or fleet managers.</span>
+              </div>
+            </li>
+          </ul>
+
+          <div class="mt-8">
+            <a href="user.html" class="px-6 py-3 rounded-xl border-2 border-slate-900 text-slate-900 font-bold hover:bg-slate-900 hover:text-white inline-flex items-center gap-2">
+              Explore Dashboard <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-slate-900 text-white">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <div class="flex flex-col lg:flex-row gap-16">
+        
+        <div class="w-full lg:w-1/3">
+          <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Database</h2>
+          <h3 class="text-3xl md:text-4xl font-extrabold mb-6">Key Type Library</h3>
+          <p class="text-slate-400 mb-8">We program, cut, and supply over 90% of automotive keys on the road today.</p>
+          
+          <div class="space-y-3">
+            <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-4 flex items-center gap-4 hover:border-[#F59E0B]/50">
+              <div class="bg-slate-800 p-2 rounded-lg text-[#F59E0B]"><i class="bi bi-key"></i></div>
+              <span class="font-semibold">Traditional Car Keys</span>
+            </div>
+            <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-4 flex items-center gap-4 hover:border-[#F59E0B]/50">
+              <div class="bg-slate-800 p-2 rounded-lg text-[#F59E0B]"><i class="bi bi-cpu"></i></div>
+              <span class="font-semibold">Transponder Keys (Chipped)</span>
+            </div>
+            <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-4 flex items-center gap-4 hover:border-[#F59E0B]/50">
+              <div class="bg-slate-800 p-2 rounded-lg text-[#F59E0B]"><i class="bi bi-wifi"></i></div>
+              <span class="font-semibold">Smart Keys & Proximity</span>
+            </div>
+            <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-4 flex items-center gap-4 hover:border-[#F59E0B]/50">
+              <div class="bg-slate-800 p-2 rounded-lg text-[#F59E0B]"><i class="bi bi-lock"></i></div>
+              <span class="font-semibold">Remote Key Fobs</span>
+            </div>
+            <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-4 flex items-center gap-4 hover:border-[#F59E0B]/50">
+              <div class="bg-slate-800 p-2 rounded-lg text-[#F59E0B]"><i class="bi bi-power"></i></div>
+              <span class="font-semibold">Push Start Fobs</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full lg:w-2/3">
+          <div class="flex items-end justify-between mb-8">
+             <div>
+              <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Transparent Costs</h2>
+              <h3 class="text-3xl md:text-4xl font-extrabold">Price Matrix</h3>
+             </div>
+             <a href="pricing.html" class="hidden sm:inline-flex items-center gap-2 text-[#F59E0B] hover:text-white">View Full List <i class="bi bi-arrow-right"></i></a>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 hover:border-[#F59E0B]/50 shadow-lg relative overflow-hidden group">
+              <div class="absolute -right-6 -top-6 text-6xl text-slate-700/30 group-hover:text-[#F59E0B]/10"><i class="bi bi-key"></i></div>
+              <h4 class="text-lg text-slate-300 font-medium">Standard Keys</h4>
+              <div class="mt-2 flex items-baseline gap-1">
+                <span class="text-sm text-slate-400">From</span>
+                <span class="text-3xl font-extrabold text-white">$49</span>
+              </div>
+            </div>
+            <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 hover:border-[#F59E0B]/50 shadow-lg relative overflow-hidden group">
+              <div class="absolute -right-6 -top-6 text-6xl text-slate-700/30 group-hover:text-[#F59E0B]/10"><i class="bi bi-cpu"></i></div>
+              <h4 class="text-lg text-slate-300 font-medium">Transponder Keys</h4>
+              <div class="mt-2 flex items-baseline gap-1">
+                <span class="text-sm text-slate-400">From</span>
+                <span class="text-3xl font-extrabold text-white">$89</span>
+              </div>
+            </div>
+            <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 hover:border-[#F59E0B]/50 shadow-lg relative overflow-hidden group">
+              <div class="absolute -right-6 -top-6 text-6xl text-slate-700/30 group-hover:text-[#F59E0B]/10"><i class="bi bi-lock"></i></div>
+              <h4 class="text-lg text-slate-300 font-medium">Remote Fobs</h4>
+              <div class="mt-2 flex items-baseline gap-1">
+                <span class="text-sm text-slate-400">From</span>
+                <span class="text-3xl font-extrabold text-white">$129</span>
+              </div>
+            </div>
+            <div class="bg-[#F59E0B]/10 rounded-2xl p-6 border border-[#F59E0B]/30 shadow-lg relative overflow-hidden">
+              <div class="absolute -right-6 -top-6 text-6xl text-[#F59E0B]/10"><i class="bi bi-wifi"></i></div>
+              <div class="absolute top-4 right-4 bg-[#F59E0B] text-slate-900 text-[10px] font-bold uppercase px-2 py-1 rounded">Popular</div>
+              <h4 class="text-lg text-[#F59E0B] font-medium">Smart / Prox Keys</h4>
+              <div class="mt-2 flex items-baseline gap-1">
+                <span class="text-sm text-slate-400">From</span>
+                <span class="text-3xl font-extrabold text-white">$179</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 flex items-start gap-3 p-4 bg-slate-800/50 rounded-xl border border-slate-700">
+            <i class="bi bi-info-circle-fill text-[#F59E0B] mt-0.5"></i>
+            <p class="text-sm text-slate-400">
+              <strong class="text-slate-300">Disclaimer:</strong> Final pricing may vary depending on the specific vehicle make, model, year, and the complexity of the programming requirements. Emergency lockouts start from $69.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-24 bg-slate-50 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Process</h2>
+        <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900">How It Works</h3>
+        <p class="mt-4 text-slate-500 text-lg">Getting a new car key is easier than ever. Follow these four simple steps.</p>
+      </div>
+
+      <div class="relative">
+        <div class="hidden lg:block absolute top-8 left-[12.5%] right-[12.5%] h-1 bg-slate-200 -z-0"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-10 lg:gap-6 relative z-10">
+          
+          <div class="flex flex-col items-center text-center bg-white lg:bg-transparent p-6 lg:p-0 rounded-2xl shadow-sm lg:shadow-none border border-slate-100 lg:border-none">
+            <div class="w-16 h-16 rounded-full bg-[#F59E0B] text-white flex items-center justify-center text-2xl font-bold shadow-lg shadow-[#F59E0B]/30 border-4 border-white mb-6">1</div>
+            <h4 class="text-lg font-bold text-slate-900 mb-2">Upload Key Photo</h4>
+            <p class="text-sm text-slate-500">Log in and upload a picture of your existing key, fob, or describe the lock issue.</p>
+          </div>
+
+          <div class="flex flex-col items-center text-center bg-white lg:bg-transparent p-6 lg:p-0 rounded-2xl shadow-sm lg:shadow-none border border-slate-100 lg:border-none">
+            <div class="w-16 h-16 rounded-full bg-[#F59E0B] text-white flex items-center justify-center text-2xl font-bold shadow-lg shadow-[#F59E0B]/30 border-4 border-white mb-6">2</div>
+            <h4 class="text-lg font-bold text-slate-900 mb-2">Receive Quote</h4>
+            <p class="text-sm text-slate-500">Our system identifies required service & provides transparent pricing estimate instantly.</p>
+          </div>
+
+          <div class="flex flex-col items-center text-center bg-white lg:bg-transparent p-6 lg:p-0 rounded-2xl shadow-sm lg:shadow-none border border-slate-100 lg:border-none">
+            <div class="w-16 h-16 rounded-full bg-[#F59E0B] text-white flex items-center justify-center text-2xl font-bold shadow-lg shadow-[#F59E0B]/30 border-4 border-white mb-6">3</div>
+            <h4 class="text-lg font-bold text-slate-900 mb-2">Book Service</h4>
+            <p class="text-sm text-slate-500">Accept the quote and choose a preferred date and time for our mobile unit to arrive.</p>
+          </div>
+
+          <div class="flex flex-col items-center text-center bg-white lg:bg-transparent p-6 lg:p-0 rounded-2xl shadow-sm lg:shadow-none border border-slate-100 lg:border-none">
+            <div class="w-16 h-16 rounded-full bg-[#F59E0B] text-white flex items-center justify-center text-2xl font-bold shadow-lg shadow-[#F59E0B]/30 border-4 border-white mb-6">4</div>
+            <h4 class="text-lg font-bold text-slate-900 mb-2">Tech Arrives</h4>
+            <p class="text-sm text-slate-500">Track technician in real-time. They complete programming directly your vehicle.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Reviews</h2>
+        <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900">Trusted By Drivers</h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        
+        <div class="bg-slate-50 p-8 rounded-3xl relative border border-slate-100">
+          <i class="bi bi-quote absolute top-6 right-8 text-6xl text-slate-200"></i>
+          <div class="flex gap-1 text-[#F59E0B] text-lg mb-4">
+            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          </div>
+          <p class="text-slate-600 text-lg mb-8 relative z-10 font-medium">"Quick response and saved my day when I lost my car keys at the supermarket. Technician was super polite."</p>
+          <div class="flex items-center gap-4">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=facearea&facepad=2&w=100&h=100&q=80" alt="Michael R." class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
+            <div>
+              <h5 class="font-bold text-slate-900">Michael R.</h5>
+              <p class="text-xs text-slate-500">2018 Honda Accord</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 p-8 rounded-3xl relative border border-slate-100">
+          <i class="bi bi-quote absolute top-6 right-8 text-6xl text-slate-200"></i>
+          <div class="flex gap-1 text-[#F59E0B] text-lg mb-4">
+            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          </div>
+          <p class="text-slate-600 text-lg mb-8 relative z-10 font-medium">"The dashboard made booking incredibly easy. I uploaded my broken fob picture and got a quote instantly."</p>
+          <div class="flex items-center gap-4">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=facearea&facepad=2&w=100&h=100&q=80" alt="Sarah K." class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
+            <div>
+              <h5 class="font-bold text-slate-900">Sarah K.</h5>
+              <p class="text-xs text-slate-500">2021 Toyota RAV4</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 p-8 rounded-3xl relative border border-slate-100">
+          <i class="bi bi-quote absolute top-6 right-8 text-6xl text-slate-200"></i>
+          <div class="flex gap-1 text-[#F59E0B] text-lg mb-4">
+            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          </div>
+          <p class="text-slate-600 text-lg mb-8 relative z-10 font-medium">"Professional technician and transparent pricing. No hidden fees like other locksmiths I've dealt with before."</p>
+          <div class="flex items-center gap-4">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=facearea&facepad=2&w=100&h=100&q=80" alt="David P." class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
+            <div>
+              <h5 class="font-bold text-slate-900">David P.</h5>
+              <p class="text-xs text-slate-500">2019 Ford F-150</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-slate-100 pt-12">
+        <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 text-black">
+          <div class="flex items-center gap-2 font-bold text-slate-800 text-lg"><i class="bi bi-award-fill text-2xl"></i> Licensed Technicians</div>
+          <div class="flex items-center gap-2 font-bold text-slate-800 text-lg"><i class="bi bi-shield-lock-fill text-2xl"></i> Fully Insured</div>
+          <div class="flex items-center gap-2 font-bold text-slate-800 text-lg"><i class="bi bi-hand-thumbs-up-fill text-2xl"></i> Satisfaction Guaranteed</div>
+          <div class="flex items-center gap-2 font-bold text-slate-800 text-lg"><i class="bi bi-lightning-fill text-2xl"></i> Same-Day Service</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      
+      <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-16 px-6 md:px-16 text-center shadow-2xl border border-slate-700">
+        
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#F59E0B_1px,transparent_1px)] [background-size:20px_20px]"></div>
+        <i class="bi bi-key-fill absolute -left-10 -bottom-10 text-9xl text-white/5"></i>
+        <i class="bi bi-car-front-fill absolute -right-10 -top-10 text-9xl text-[#F59E0B]/5"></i>
+        
+        <div class="relative z-10 max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-6">Need a New Car Key Today?</h2>
+          <p class="text-slate-300 text-lg mb-10">
+            Get fast, reliable mobile locksmith assistance wherever you are. Request a quote, schedule service, and track your technician—all from one powerful dashboard.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="quote.html" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#F59E0B] text-white text-lg font-bold hover:bg-[#D97706] shadow-lg shadow-[#F59E0B]/25">
+              Get Instant Quote
+            </a>
+            <a href="tel:+15551234567" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white text-slate-900 text-lg font-bold hover:bg-slate-100 flex items-center justify-center gap-2">
+              <i class="bi bi-telephone-fill"></i> Emergency Call
+            </a>
+          </div>
+          
+          <p class="mt-8 text-sm text-slate-400 font-medium">
+            <i class="bi bi-info-circle-fill text-[#F59E0B]"></i> Available 24/7 for emergency lockouts and urgent key replacements.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Select all elements with the 'js-reveal' class
+    const revealElements = document.querySelectorAll('.js-reveal');
+
+    // Create an Intersection Observer
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Add the visible class to trigger the CSS transition
+          entry.target.classList.add('is-visible');
+          // Optional: Stop observing once revealed to only animate once
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.1, // Trigger when 10% of the element is visible
+      rootMargin: "0px 0px -50px 0px" // Slightly before the bottom of viewport
+    });
+
+    // Observe each element
+    revealElements.forEach(el => revealObserver.observe(el));
+  });
+</script>
+  <!-- FOOTER -->
+  <div id="footer"></div>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'ui-sans-serif', 'system-ui'],
+          },
+        },
+      },
+    }
+    lucide.createIcons();
+  </script>
+  <script src="navbar.js"></script>
+  <script src="footer.js"></script>
+</body>
+
+</html>

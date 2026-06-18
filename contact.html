@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - KeyDash</title>
+  <link rel="icon" href="images/logo.jpeg">
+  <script src="tailwind.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .rtl { direction: rtl; }
+    [dir="rtl"] .title { margin-right: 20px !important; }
+    :root { --home-bg: #ffffff; --text-color: #111111; }
+    [data-theme="dark"] { --home-bg: #000000; --text-color: #ffffff; }
+    body {
+      background-color: var(--home-bg) !important;
+      color: var(--text-color);
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+    [data-theme="dark"] section, [data-theme="dark"] .card { background-color: #111111 !important; border-color: #333333 !important; }
+    [data-theme="dark"] .btn, [data-theme="dark"] .btn1:hover { color: #000000 !important; }
+    [data-theme="dark"] body, [data-theme="dark"] p, [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3,
+    [data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6, [data-theme="dark"] span, [data-theme="dark"] li,
+    [data-theme="dark"] a, [data-theme="dark"] label, [data-theme="dark"] small, [data-theme="dark"] strong, [data-theme="dark"] .title { color: #ffffff !important; }
+    [data-theme="dark"] main { background-color: #111111 !important; }
+    [data-theme="dark"] .bg-white, [data-theme="dark"] .bg-slate-50 { background-color: #111111 !important; }
+    [data-theme="dark"] .bg-white.rounded-2xl, [data-theme="dark"] .bg-slate-50.rounded-3xl,
+    [data-theme="dark"] .bg-slate-50.p-8 { background-color: #1a1a1a !important; border-color: #2a2a2a !important; }
+    [data-theme="dark"] .bg-amber-50 { background-color: #2a1f00 !important; }
+    [data-theme="dark"] .bg-slate-100 { background-color: #1a1a1a !important; }
+    [data-theme="dark"] .text-slate-500, [data-theme="dark"] .text-slate-600 { color: #9ca3af !important; }
+    [data-theme="dark"] .text-slate-900 { color: #f1f5f9 !important; }
+    [data-theme="dark"] .text-slate-300 { color: #cbd5e1 !important; }
+    [data-theme="dark"] .text-slate-400 { color: #94a3b8 !important; }
+    [data-theme="dark"] .text-slate-800 { color: #e2e8f0 !important; }
+    [data-theme="dark"] .border-slate-100, [data-theme="dark"] .border-slate-200 { border-color: #2a2a2a !important; }
+    [data-theme="dark"] .bg-slate-900 { background-color: #1a1a1a !important; }
+    [data-theme="dark"] a.bg-white.text-slate-900 {
+      background-color: #1a1a1a !important; color: #ffffff !important; border: 1px solid #333333 !important;
+    }
+    [data-theme="dark"] a.bg-white.text-slate-900:hover { background-color: #2a2a2a !important; }
+    [data-theme="dark"] .bg-slate-900.text-white { background-color: #0a0a0a !important; }
+    [data-theme="dark"] .hover\:bg-slate-50:hover { background-color: #1f1f1f !important; }
+    [data-theme="dark"] input, [data-theme="dark"] textarea, [data-theme="dark"] select {
+      background-color: #1a1a1a !important; color: #fff !important; border-color: #333 !important;
+    }
+    .js-reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .js-reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+  </style>
+</head>
+
+<body class="font-sans">
+  <div id="navbar"></div>
+  <main class="w-full bg-white overflow-hidden font-sans">
+    <!-- HERO BANNER -->
+    <section class="relative min-h-[75vh] flex items-center pt-28 pb-20 lg:pt-36 lg:pb-28 overflow-hidden">
+      <div class="absolute inset-0 bg-[url('images/bg4.webp')] bg-cover bg-center bg-no-repeat"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/80 to-slate-900/60"></div>
+      <div class="absolute -bottom-32 -left-32 w-96 h-96 bg-[#F59E0B]/10 rounded-full blur-3xl"></div>
+      <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div class="max-w-3xl mx-auto text-center">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F59E0B]/10 text-[#F59E0B] border border-[#F59E0B]/30 font-semibold text-sm mb-6 backdrop-blur-sm animate-fade-up" style="animation-delay:0.1s">
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-[#F59E0B]"></span>
+            Get In Touch
+          </div>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight animate-fade-up" style="animation-delay:0.2s">
+            <span class="text-[#F59E0B]">Contact</span> Us
+          </h1>
+          <p class="mt-6 text-lg md:text-xl text-slate-300 leading-relaxed max-w-2xl animate-fade-up" style="animation-delay:0.3s">
+            Have a question or need immediate assistance? Reach out to our team. We're available 24/7 for emergencies and ready to help.
+          </p>
+          <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up" style="animation-delay:0.4s">
+            <a href="tel:+15551234567" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#F59E0B] text-white text-lg font-bold hover:bg-[#D97706] shadow-lg shadow-[#F59E0B]/25 inline-flex items-center justify-center gap-2">
+              <i class="bi bi-telephone-fill"></i> Call Now
+            </a>
+            <a href="#contact-form" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/10 text-white border border-white/20 text-lg font-bold hover:bg-white/20 backdrop-blur-md inline-flex items-center justify-center gap-2">
+              <i class="bi bi-envelope-fill"></i> Send Message
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT INFO CARDS -->
+    <section class="py-20 bg-white relative">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 -mt-16 sm:-mt-24 lg:-mt-32 relative z-20">
+          <div class="bg-white rounded-2xl p-6 shadow-xl border border-slate-100 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 text-center">
+            <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-2xl mx-auto mb-4">
+              <i class="bi bi-telephone-fill"></i>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900 mb-1">Phone</h4>
+            <p class="text-slate-500 text-sm mb-1">24/7 Emergency Line</p>
+            <a href="tel:+15551234567" class="text-[#F59E0B] font-bold hover:text-[#D97706] text-lg">+1 (555) 123-4567</a>
+          </div>
+          <div class="bg-white rounded-2xl p-6 shadow-xl border border-slate-100 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 text-center">
+            <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-2xl mx-auto mb-4">
+              <i class="bi bi-envelope-fill"></i>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900 mb-1">Email</h4>
+            <p class="text-slate-500 text-sm mb-1">Send us a message</p>
+            <a href="mailto:dispatch@mobilekeys.com" class="text-[#F59E0B] font-bold hover:text-[#D97706] text-sm sm:text-base lg:text-sm xl:text-base break-all">mobilekey@gmail.com</a>
+          </div>
+          <div class="bg-white rounded-2xl p-6 shadow-xl border border-slate-100 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 text-center">
+            <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-2xl mx-auto mb-4">
+              <i class="bi bi-geo-alt-fill"></i>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900 mb-1">Service Area</h4>
+            <p class="text-slate-500 text-sm mb-1">Greater Metro Area</p>
+            <p class="text-slate-900 font-bold text-lg">Mobile Units Only</p>
+          </div>
+          <div class="bg-white rounded-2xl p-6 shadow-xl border border-slate-100 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 text-center">
+            <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-2xl mx-auto mb-4">
+              <i class="bi bi-clock-fill"></i>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900 mb-1">Hours</h4>
+            <p class="text-slate-500 text-sm mb-1">Emergency 24/7</p>
+            <p class="text-slate-900 font-bold text-lg">Always Open</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- CONTACT FORM + INFO -->
+    <section id="contact-form" class="py-20 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+          <div>
+            <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Message</h2>
+            <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">Send Us A Message</h3>
+            <p class="text-slate-500 mb-8">Fill out the form and we'll get back to you within minutes during business hours.</p>
+            <form class="space-y-5">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
+                  <input type="text" placeholder="John Doe" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:border-[#F59E0B] focus:ring-2 focus:ring-[#F59E0B]/20 outline-none transition-all bg-white">
+                </div>
+                <div>
+                  <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address</label>
+                  <input type="email" placeholder="john@example.com" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:border-[#F59E0B] focus:ring-2 focus:ring-[#F59E0B]/20 outline-none transition-all bg-white">
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Phone Number</label>
+                <input type="tel" placeholder="(555) 123-4567" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:border-[#F59E0B] focus:ring-2 focus:ring-[#F59E0B]/20 outline-none transition-all bg-white">
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Service Needed</label>
+                <select class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:border-[#F59E0B] focus:ring-2 focus:ring-[#F59E0B]/20 outline-none transition-all bg-white text-slate-500">
+                  <option value="">Select a service...</option>
+                  <option>Car Key Replacement</option>
+                  <option>Key Fob Programming</option>
+                  <option>Transponder Duplicate</option>
+                  <option>Broken Key Extraction</option>
+                  <option>Emergency Lockout</option>
+                  <option>Ignition Repair</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Message</label>
+                <textarea rows="4" placeholder="Describe your issue or question..." class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:border-[#F59E0B] focus:ring-2 focus:ring-[#F59E0B]/20 outline-none transition-all bg-white resize-none"></textarea>
+              </div>
+              <button type="submit" class="w-full px-8 py-4 rounded-xl bg-[#F59E0B] text-white text-lg font-bold hover:bg-[#D97706] shadow-lg shadow-[#F59E0B]/25 transition-all inline-flex items-center justify-center gap-2">
+                <i class="bi bi-send-fill"></i> Send Message
+              </button>
+            </form>
+          </div>
+          <div class="flex flex-col justify-between">
+            <div>
+              <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Information</h2>
+              <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">Dispatch Information</h3>
+              <p class="text-slate-500 mb-8">Our dispatch center coordinates all mobile units. When you call or submit a request, we assign the nearest available technician.</p>
+              <div class="space-y-6 mb-10">
+                <div class="flex items-start gap-4 p-4 bg-white rounded-xl border border-slate-100">
+                  <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-xl shrink-0"><i class="bi bi-headset"></i></div>
+                  <div>
+                    <h4 class="font-bold text-slate-900">24/7 Dispatch</h4>
+                    <p class="text-sm text-slate-500">Our team is standing by 24 hours a day, 7 days a week, including holidays.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4 p-4 bg-white rounded-xl border border-slate-100">
+                  <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-xl shrink-0"><i class="bi bi-truck"></i></div>
+                  <div>
+                    <h4 class="font-bold text-slate-900">Mobile Fleet</h4>
+                    <p class="text-sm text-slate-500">Fully equipped service vehicles with all key cutting and programming tools on board.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4 p-4 bg-white rounded-xl border border-slate-100">
+                  <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-xl shrink-0"><i class="bi bi-shield-check"></i></div>
+                  <div>
+                    <h4 class="font-bold text-slate-900">Licensed & Insured</h4>
+                    <p class="text-sm text-slate-500">All technicians are background-checked, licensed, and fully insured for your protection.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-slate-900 rounded-2xl p-8 border border-slate-800">
+              <p class="text-sm text-slate-400 mb-2">Emergency?</p>
+              <h4 class="text-xl font-bold text-white mb-3">Call Our 24/7 Hotline</h4>
+              <a href="tel:+15551234567" class="text-2xl sm:text-3xl font-extrabold text-[#F59E0B] hover:text-[#D97706] transition-colors break-all">+1 (555) 123-4567</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- BUSINESS HOURS -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Hours</h2>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900">When We're Available</h3>
+          <p class="mt-4 text-slate-500 text-lg">Emergency services operate 24/7. Scheduled appointments available during standard hours.</p>
+        </div>
+        <div class="max-w-3xl mx-auto">
+          <div class="bg-slate-50 rounded-3xl p-8 md:p-12 border border-slate-100">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              <div>
+                <h4 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2"><i class="bi bi-calendar-week text-[#F59E0B]"></i> Standard Hours</h4>
+                <div class="space-y-3 text-sm">
+                  <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-slate-600">Monday - Friday</span>
+                    <span class="font-bold text-slate-900">7:00 AM - 9:00 PM</span>
+                  </div>
+                  <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-slate-600">Saturday</span>
+                    <span class="font-bold text-slate-900">8:00 AM - 8:00 PM</span>
+                  </div>
+                  <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                    <span class="text-slate-600">Sunday</span>
+                    <span class="font-bold text-slate-900">9:00 AM - 5:00 PM</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2"><i class="bi bi-lightning-fill text-[#F59E0B]"></i> Emergency Services</h4>
+                <div class="bg-[#F59E0B]/5 border border-[#F59E0B]/20 rounded-2xl p-6 text-center">
+                  <div class="text-4xl text-[#F59E0B] mb-3"><i class="bi bi-clock-fill"></i></div>
+                  <p class="text-2xl font-extrabold text-slate-900">24/7</p>
+                  <p class="text-slate-500 text-sm mt-1">Always available for lockouts & urgent replacements</p>
+                </div>
+                <p class="text-xs text-slate-400 mt-4 text-center">Emergency services may incur a night surcharge after 8 PM.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICE AREA MAP -->
+    <section class="py-20 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Coverage Map</h2>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900">Service Area</h3>
+          <p class="mt-4 text-slate-500 text-lg">We cover the entire metro area with an average 30-minute response time.</p>
+        </div>
+        <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-lg">
+          <div class="rounded-2xl overflow-hidden relative h-56 sm:h-72 md:h-[450px]">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.11976397304605!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+              width="100%"
+              height="100%"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              class="w-full h-full">
+            </iframe>
+          </div>
+          <div class="mt-4 bg-slate-50 rounded-xl p-4 border border-slate-100 flex flex-wrap gap-4 justify-center text-xs font-medium">
+            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-green-500"></span> Downtown</span>
+            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-blue-500"></span> Eastside</span>
+            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-purple-500"></span> West County</span>
+            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-amber-500"></span> North Suburbs</span>
+            <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-red-500"></span> South Valley</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOCIAL PROOF -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="bg-slate-50 rounded-3xl p-6 sm:p-10 md:p-16 border border-slate-100">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Trusted</h2>
+              <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">Join 5,000+ Satisfied Drivers</h3>
+              <p class="text-slate-500 text-lg mb-8">
+                Don't just take our word for it. Our verified customer reviews speak to our commitment to quality, speed, and transparency.
+              </p>
+              <div class="flex flex-wrap gap-8">
+                <div>
+                  <div class="flex gap-1 text-[#F59E0B] text-lg mb-1">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                  </div>
+                  <p class="text-2xl font-extrabold text-slate-900">4.9 / 5.0</p>
+                  <p class="text-sm text-slate-400">Average rating</p>
+                </div>
+                <div>
+                  <div class="flex gap-1 text-[#F59E0B] text-lg mb-1">
+                    <i class="bi bi-people-fill"></i>
+                  </div>
+                  <p class="text-2xl font-extrabold text-slate-900">5,000+</p>
+                  <p class="text-sm text-slate-400">Services completed</p>
+                </div>
+              </div>
+              <div class="mt-8 flex flex-wrap gap-4">
+                <a href="#" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-black text-white font-bold hover:bg-slate-800 transition text-sm">
+                  <i class="bi bi-google"></i> Google Reviews
+                </a>
+                <a href="#" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#1DA1F2] text-white font-bold hover:bg-[#1a8cd8] transition text-sm">
+                  <i class="bi bi-twitter-x"></i> Social Feed
+                </a>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+                <div class="flex gap-1 text-[#F59E0B] text-sm mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                <p class="text-sm text-slate-600 line-clamp-3">"Fast, fair, and friendly. Couldn't ask for more from a locksmith service."</p>
+                <p class="text-xs font-bold text-slate-900 mt-2">- James K.</p>
+              </div>
+              <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+                <div class="flex gap-1 text-[#F59E0B] text-sm mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                <p class="text-sm text-slate-600 line-clamp-3">"Saved me hundreds vs the dealership. Tech was at my office in 20 minutes."</p>
+                <p class="text-xs font-bold text-slate-900 mt-2">- Lisa M.</p>
+              </div>
+              <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+                <div class="flex gap-1 text-[#F59E0B] text-sm mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                <p class="text-sm text-slate-600 line-clamp-3">"The online portal is amazing. Uploaded photos and got a quote instantly."</p>
+                <p class="text-xs font-bold text-slate-900 mt-2">- Mark T.</p>
+              </div>
+              <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+                <div class="flex gap-1 text-[#F59E0B] text-sm mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                <p class="text-sm text-slate-600 line-clamp-3">"Professional, on time, and the key works perfectly. Highly recommend."</p>
+                <p class="text-xs font-bold text-slate-900 mt-2">- Rachel S.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+
+  </main>
+
+  <div id="footer"></div>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'ui-sans-serif', 'system-ui'],
+          },
+        },
+      },
+    }
+    lucide.createIcons();
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const revealElements = document.querySelectorAll('.js-reveal');
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { root: null, threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+      revealElements.forEach(el => revealObserver.observe(el));
+    });
+  </script>
+  <script src="navbar.js"></script>
+  <script src="footer.js"></script>
+</body>
+
+</html>

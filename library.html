@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Key Library - KeyDash</title>
+  <link rel="icon" href="images/logo.jpeg">
+  <script src="tailwind.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .rtl { direction: rtl; }
+    [dir="rtl"] .title { margin-right: 20px !important; }
+    :root { --home-bg: #ffffff; --text-color: #111111; }
+    [data-theme="dark"] { --home-bg: #000000; --text-color: #ffffff; }
+    body {
+      background-color: var(--home-bg) !important;
+      color: var(--text-color);
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+    [data-theme="dark"] section, [data-theme="dark"] .card { background-color: #111111 !important; border-color: #333333 !important; }
+    [data-theme="dark"] .btn, [data-theme="dark"] .btn1:hover { color: #000000 !important; }
+    [data-theme="dark"] body, [data-theme="dark"] p, [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3,
+    [data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6, [data-theme="dark"] span, [data-theme="dark"] li,
+    [data-theme="dark"] a, [data-theme="dark"] label, [data-theme="dark"] small, [data-theme="dark"] strong, [data-theme="dark"] .title { color: #ffffff !important; }
+    [data-theme="dark"] main { background-color: #111111 !important; }
+    [data-theme="dark"] .bg-white, [data-theme="dark"] .bg-slate-50 { background-color: #111111 !important; }
+    [data-theme="dark"] .bg-white.rounded-2xl, [data-theme="dark"] .bg-slate-50.rounded-3xl,
+    [data-theme="dark"] .bg-slate-50.p-8 { background-color: #1a1a1a !important; border-color: #2a2a2a !important; }
+    [data-theme="dark"] .bg-amber-50 { background-color: #2a1f00 !important; }
+    [data-theme="dark"] .bg-slate-100 { background-color: #1a1a1a !important; }
+    [data-theme="dark"] .text-slate-500, [data-theme="dark"] .text-slate-600 { color: #9ca3af !important; }
+    [data-theme="dark"] .text-slate-900 { color: #f1f5f9 !important; }
+    [data-theme="dark"] .text-slate-300 { color: #cbd5e1 !important; }
+    [data-theme="dark"] .text-slate-400 { color: #94a3b8 !important; }
+    [data-theme="dark"] .text-slate-800 { color: #e2e8f0 !important; }
+    [data-theme="dark"] .border-slate-100, [data-theme="dark"] .border-slate-200 { border-color: #2a2a2a !important; }
+    [data-theme="dark"] .bg-slate-900 { background-color: #1a1a1a !important; }
+    [data-theme="dark"] a.bg-white.text-slate-900 {
+      background-color: #1a1a1a !important; color: #ffffff !important; border: 1px solid #333333 !important;
+    }
+    [data-theme="dark"] a.bg-white.text-slate-900:hover { background-color: #2a2a2a !important; }
+    [data-theme="dark"] .bg-slate-900.text-white { background-color: #0a0a0a !important; }
+    [data-theme="dark"] .hover\:bg-slate-50:hover { background-color: #1f1f1f !important; }
+    .js-reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .js-reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+  </style>
+</head>
+
+<body class="font-sans">
+  <div id="navbar"></div>
+
+  <main class="w-full bg-white overflow-hidden font-sans">
+
+    <!-- HERO BANNER -->
+    <section class="relative min-h-[75vh] flex items-center pt-28 pb-20 lg:pt-36 lg:pb-28 overflow-hidden">
+      <div class="absolute inset-0 bg-[url('images/bg2.avif')] bg-cover bg-center bg-no-repeat"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/80 to-slate-900/70"></div>
+      <div class="absolute top-20 right-0 w-1/3 h-1/2 bg-gradient-to-bl from-[#F59E0B]/10 to-transparent rounded-full blur-3xl"></div>
+      <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div class="max-w-3xl mx-auto text-center">
+          <div class="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-[#F59E0B]/10 text-[#F59E0B] border border-[#F59E0B]/30 font-semibold text-sm mb-6 backdrop-blur-sm animate-fade-up" style="animation-delay:0.1s">
+            <i class="bi bi-book-fill"></i> Reference Database
+          </div>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight animate-fade-up" style="animation-delay:0.2s">
+            Key Type <span class="text-[#F59E0B]">Library</span>
+          </h1>
+          <p class="mt-6 text-lg md:text-xl text-slate-300 leading-relaxed max-w-2xl mx-auto animate-fade-up" style="animation-delay:0.3s">
+            A comprehensive guide to automotive keys and fobs. Identify your key type and understand the technology behind modern vehicle security systems.
+          </p>
+          <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up" style="animation-delay:0.4s">
+            <a href="#library-grid" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#F59E0B] text-white text-lg font-bold hover:bg-[#D97706] shadow-lg shadow-[#F59E0B]/25 inline-flex items-center justify-center gap-2">
+              <i class="bi bi-collection-fill"></i> Browse Library
+            </a>
+            <a href="contact.html" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/10 text-white border border-white/20 text-lg font-bold hover:bg-white/20 backdrop-blur-md inline-flex items-center justify-center gap-2">
+              <i class="bi bi-question-circle-fill"></i> Need Help Identifying?
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEY TYPE CATEGORIES GRID -->
+    <section id="library-grid" class="py-24 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Categories</h2>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900">Complete Key Taxonomy</h3>
+          <p class="mt-4 text-slate-500 text-lg">We support over 95% of automotive key types currently on the road.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+            <div class="h-44 bg-gradient-to-br from-slate-100 to-slate-50 flex items-center justify-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-[#F59E0B]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <img src="images/keys/traditional.png" alt="Traditional Car Key" class="h-full w-full object-contain p-4 group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="p-6">
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="text-xl font-bold text-slate-900">Traditional Keys</h4>
+                <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded-lg">Basic</span>
+              </div>
+              <p class="text-slate-500 text-sm mb-4">Standard metal keys with no electronic components. Used in older vehicles and some budget models.</p>
+              <div class="flex items-center gap-2 text-xs text-slate-400">
+                <i class="bi bi-clock"></i> 15 min service
+              </div>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+            <div class="h-44 bg-gradient-to-br from-slate-100 to-slate-50 flex items-center justify-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-[#F59E0B]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <img src="images/keys/transponder.png" alt="Transponder Car Key" class="h-full w-full object-contain p-4 group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="p-6">
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="text-xl font-bold text-slate-900">Transponder Keys</h4>
+                <span class="text-xs font-bold text-[#F59E0B] bg-amber-50 px-2 py-1 rounded-lg">Chipped</span>
+              </div>
+              <p class="text-slate-500 text-sm mb-4">Keys with embedded microchips that communicate with the vehicle's immobilizer system to prevent unauthorized use.</p>
+              <div class="flex items-center gap-2 text-xs text-slate-400">
+                <i class="bi bi-clock"></i> 30 min service
+              </div>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+            <div class="h-44 bg-gradient-to-br from-slate-100 to-slate-50 flex items-center justify-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-[#F59E0B]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <img src="images/keys/fob.png" alt="Remote Key Fob" class="h-full w-full object-contain p-4 group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="p-6">
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="text-xl font-bold text-slate-900">Remote Key Fobs</h4>
+                <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded-lg">Keyless Entry</span>
+              </div>
+              <p class="text-slate-500 text-sm mb-4">Standalone or integrated remotes that control door locks, trunk release, and panic alarm functions.</p>
+              <div class="flex items-center gap-2 text-xs text-slate-400">
+                <i class="bi bi-clock"></i> 30 min service
+              </div>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group relative">
+            <div class="absolute top-4 right-4 bg-[#F59E0B] text-white text-[10px] font-bold px-2 py-1 rounded-lg z-10">Popular</div>
+            <div class="h-44 bg-gradient-to-br from-amber-50 to-amber-100/50 flex items-center justify-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-[#F59E0B]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <img src="images/keys/smart.png" alt="Smart Proximity Key" class="h-full w-full object-contain p-4 group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="p-6">
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="text-xl font-bold text-slate-900">Smart / Proximity Keys</h4>
+                <span class="text-xs font-bold text-[#F59E0B] bg-amber-50 px-2 py-1 rounded-lg">Push-Start</span>
+              </div>
+              <p class="text-slate-500 text-sm mb-4">Advanced fobs that communicate wirelessly with the car. Enables keyless entry and push-button ignition.</p>
+              <div class="flex items-center gap-2 text-xs text-slate-400">
+                <i class="bi bi-clock"></i> 45 min service
+              </div>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+            <div class="h-44 bg-gradient-to-br from-slate-100 to-slate-50 flex items-center justify-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-[#F59E0B]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <img src="images/keys/laser_cut.png" alt="Laser-Cut Car Key" class="h-full w-full object-contain p-4 group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="p-6">
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="text-xl font-bold text-slate-900">Laser-Cut Keys</h4>
+                <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded-lg">High Security</span>
+              </div>
+              <p class="text-slate-500 text-sm mb-4">Keys with precision-milled grooves on both sides. Often used in luxury vehicles for enhanced security.</p>
+              <div class="flex items-center gap-2 text-xs text-slate-400">
+                <i class="bi bi-clock"></i> 30 min service
+              </div>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+            <div class="h-44 bg-gradient-to-br from-slate-100 to-slate-50 flex items-center justify-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-[#F59E0B]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <img src="images/keys/switchblade.png" alt="Switchblade Folding Key" class="h-full w-full object-contain p-4 group-hover:scale-105 transition-transform duration-300">
+            </div>
+            <div class="p-6">
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="text-xl font-bold text-slate-900">Switchblade Keys</h4>
+                <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded-lg">Folding</span>
+              </div>
+              <p class="text-slate-500 text-sm mb-4">A key blade that folds into the fob body via a spring-loaded mechanism. Common in VW, Audi, and Mercedes.</p>
+              <div class="flex items-center gap-2 text-xs text-slate-400">
+                <i class="bi bi-clock"></i> 30 min service
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DETAILED KEY TYPE BREAKDOWN -->
+    <section class="py-24 bg-white relative overflow-hidden">
+      <div class="absolute -left-40 top-20 w-80 h-80 bg-[#F59E0B]/5 rounded-full blur-3xl"></div>
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">In-Depth</h2>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900">How Each Key Type Works</h3>
+          <p class="mt-4 text-slate-500 text-lg">Understanding the technology behind your car key helps us serve you better.</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-all duration-300">
+            <div class="flex items-center gap-4 mb-5">
+              <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-xl"><i class="bi bi-cpu"></i></div>
+              <div>
+                <h4 class="text-lg font-bold text-slate-900">Transponder Technology</h4>
+                <p class="text-sm text-slate-400">RFID-based immobilizer system</p>
+              </div>
+            </div>
+            <p class="text-slate-500 text-sm mb-4">When the key is inserted, the vehicle sends a radio signal to the transponder chip. The chip responds with a unique code. If the codes match, the engine starts. This prevents hot-wiring.</p>
+            <div class="bg-white rounded-xl p-4 border border-slate-100">
+              <p class="text-xs font-semibold text-slate-700 mb-1">Compatible Brands</p>
+              <div class="flex flex-wrap gap-2 text-xs">
+                <span class="bg-slate-100 px-2 py-1 rounded-md">Toyota</span>
+                <span class="bg-slate-100 px-2 py-1 rounded-md">Honda</span>
+                <span class="bg-slate-100 px-2 py-1 rounded-md">Ford</span>
+                <span class="bg-slate-100 px-2 py-1 rounded-md">Chevrolet</span>
+                <span class="bg-slate-100 px-2 py-1 rounded-md">Nissan</span>
+                <span class="bg-slate-100 px-2 py-1 rounded-md">Hyundai</span>
+              </div>
+            </div>
+          </div>
+          <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-all duration-300">
+            <div class="flex items-center gap-4 mb-5">
+              <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-xl"><i class="bi bi-wifi"></i></div>
+              <div>
+                <h4 class="text-lg font-bold text-slate-900">Smart / Proximity Technology</h4>
+                <p class="text-sm text-slate-400">RF & NFC-based passive entry</p>
+              </div>
+            </div>
+            <p class="text-slate-500 text-sm mb-4">The fob constantly broadcasts a low-frequency signal. When the car detects the fob within range (typically 1-2 meters), it authenticates the signal and unlocks the doors. Push-start works via encrypted RFID handshake.</p>
+            <div class="bg-white rounded-xl p-4 border border-slate-100">
+              <p class="text-xs font-semibold text-slate-700 mb-1">Compatible Brands</p>
+              <div class="flex flex-wrap gap-2 text-xs">
+                <span class="bg-slate-100 px-2 py-1 rounded-md">BMW</span>
+                <span class="bg-slate-100 px-2 py-1 rounded-md">Mercedes</span>
+                <span class="bg-slate-100 px-2 py-1 rounded-md">Audi</span>
+                <span class="bg-slate-100 px-2 py-1 rounded-md">Lexus</span>
+                <span class="bg-slate-100 px-2 py-1 rounded-md">Porsche</span>
+                <span class="bg-slate-100 px-2 py-1 rounded-md">Tesla</span>
+              </div>
+            </div>
+          </div>
+          <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-all duration-300">
+            <div class="flex items-center gap-4 mb-5">
+              <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-xl"><i class="bi bi-lock"></i></div>
+              <div>
+                <h4 class="text-lg font-bold text-slate-900">Remote Keyless Entry</h4>
+                <p class="text-sm text-slate-400">UHF radio frequency remotes</p>
+              </div>
+            </div>
+            <p class="text-slate-500 text-sm mb-4">A remote fob transmits a coded UHF signal to the vehicle's receiver. A rolling code system ensures each press generates a unique signal, preventing code grabbing and replay attacks.</p>
+            <div class="bg-white rounded-xl p-4 border border-slate-100">
+              <p class="text-xs font-semibold text-slate-700 mb-1">Typical Range</p>
+              <p class="text-sm text-slate-500">Up to 30-50 feet line of sight, depending on the vehicle and environment.</p>
+            </div>
+          </div>
+          <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-all duration-300">
+            <div class="flex items-center gap-4 mb-5">
+              <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-xl"><i class="bi bi-key"></i></div>
+              <div>
+                <h4 class="text-lg font-bold text-slate-900">Traditional / Mechanical Keys</h4>
+                <p class="text-sm text-slate-400">Physical key cutting only</p>
+              </div>
+            </div>
+            <p class="text-slate-500 text-sm mb-4">These keys rely purely on the physical shape of the blade matching the lock cylinder wafers. No electronic authentication. Used primarily in pre-2000 vehicles and as emergency backup blades.</p>
+            <div class="bg-white rounded-xl p-4 border border-slate-100">
+              <p class="text-xs font-semibold text-slate-700 mb-1">Cutting Methods</p>
+              <p class="text-sm text-slate-500">Edge-cut (standard) or laser-track (sidewinder) milling.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BRAND COMPATIBILITY -->
+    <section class="py-24 bg-slate-900 relative overflow-hidden">
+      <div class="absolute inset-0 bg-[radial-gradient(#F59E0B_1px,transparent_1px)] [background-size:24px_24px] opacity-5"></div>
+      <div class="relative z-10 max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Compatibility</h2>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-white">Supported Vehicle Brands</h3>
+          <p class="mt-4 text-slate-400 text-lg">We program keys for virtually every manufacturer — domestic, Asian, and European.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:bg-white/10 hover:border-[#F59E0B]/30 transition-all duration-300">
+            <div class="text-3xl mb-2 text-slate-300"><i class="bi bi-car-front"></i></div>
+            <p class="text-white font-medium text-sm">Toyota</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:bg-white/10 hover:border-[#F59E0B]/30 transition-all duration-300">
+            <div class="text-3xl mb-2 text-slate-300"><i class="bi bi-car-front"></i></div>
+            <p class="text-white font-medium text-sm">Honda</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:bg-white/10 hover:border-[#F59E0B]/30 transition-all duration-300">
+            <div class="text-3xl mb-2 text-slate-300"><i class="bi bi-car-front"></i></div>
+            <p class="text-white font-medium text-sm">Ford</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:bg-white/10 hover:border-[#F59E0B]/30 transition-all duration-300">
+            <div class="text-3xl mb-2 text-slate-300"><i class="bi bi-car-front"></i></div>
+            <p class="text-white font-medium text-sm">Chevrolet</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:bg-white/10 hover:border-[#F59E0B]/30 transition-all duration-300">
+            <div class="text-3xl mb-2 text-slate-300"><i class="bi bi-car-front"></i></div>
+            <p class="text-white font-medium text-sm">BMW</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:bg-white/10 hover:border-[#F59E0B]/30 transition-all duration-300">
+            <div class="text-3xl mb-2 text-slate-300"><i class="bi bi-car-front"></i></div>
+            <p class="text-white font-medium text-sm">Mercedes</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:bg-white/10 hover:border-[#F59E0B]/30 transition-all duration-300">
+            <div class="text-3xl mb-2 text-slate-300"><i class="bi bi-car-front"></i></div>
+            <p class="text-white font-medium text-sm">Audi</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:bg-white/10 hover:border-[#F59E0B]/30 transition-all duration-300">
+            <div class="text-3xl mb-2 text-slate-300"><i class="bi bi-car-front"></i></div>
+            <p class="text-white font-medium text-sm">Nissan</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:bg-white/10 hover:border-[#F59E0B]/30 transition-all duration-300">
+            <div class="text-3xl mb-2 text-slate-300"><i class="bi bi-car-front"></i></div>
+            <p class="text-white font-medium text-sm">Hyundai</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:bg-white/10 hover:border-[#F59E0B]/30 transition-all duration-300">
+            <div class="text-3xl mb-2 text-slate-300"><i class="bi bi-car-front"></i></div>
+            <p class="text-white font-medium text-sm">Kia</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:bg-white/10 hover:border-[#F59E0B]/30 transition-all duration-300">
+            <div class="text-3xl mb-2 text-slate-300"><i class="bi bi-car-front"></i></div>
+            <p class="text-white font-medium text-sm">Lexus</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:bg-white/10 hover:border-[#F59E0B]/30 transition-all duration-300">
+            <div class="text-3xl mb-2 text-slate-300"><i class="bi bi-car-front"></i></div>
+            <p class="text-white font-medium text-sm">Porsche</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW TO IDENTIFY -->
+    <section class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Identification</h2>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900">How To Identify Your Key Type</h3>
+          <p class="mt-4 text-slate-500 text-lg">Not sure what kind of key you have? Use these simple clues.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-all duration-300 text-center">
+            <div class="w-16 h-16 rounded-full bg-amber-50 flex items-center justify-center text-[#F59E0B] text-3xl mx-auto mb-5">1</div>
+            <h4 class="text-lg font-bold text-slate-900 mb-3">Look At Blade</h4>
+            <p class="text-slate-500 text-sm">Is it a plain metal blade with cuts on one edge? That's a traditional key. Precision grooves on both sides? That's a laser-cut key.</p>
+          </div>
+          <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-all duration-300 text-center">
+            <div class="w-16 h-16 rounded-full bg-amber-50 flex items-center justify-center text-[#F59E0B] text-3xl mx-auto mb-5">2</div>
+            <h4 class="text-lg font-bold text-slate-900 mb-3">Check The Head</h4>
+            <p class="text-slate-500 text-sm">A thick plastic head usually means there's a transponder chip inside. If the key has buttons, it's a remote fob.</p>
+          </div>
+          <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-all duration-300 text-center">
+            <div class="w-16 h-16 rounded-full bg-amber-50 flex items-center justify-center text-[#F59E0B] text-3xl mx-auto mb-5">3</div>
+            <h4 class="text-lg font-bold text-slate-900 mb-3">Start Your Car</h4>
+            <p class="text-slate-500 text-sm">Do you push a button to start? That's a smart/proximity system. Do you turn a key? It's traditional or transponder.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOWNLOAD / RESOURCES -->
+    <section class="py-24 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="bg-white rounded-3xl p-10 md:p-16 border border-slate-100 shadow-lg">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Resource</h2>
+              <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">Need A Quick Reference?</h3>
+              <p class="text-slate-500 text-lg mb-8">
+                Download our complete key type identification guide. It includes photos, compatibility charts, and typical service pricing for every key category.
+              </p>
+              <a href="#" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#F59E0B] text-white text-lg font-bold hover:bg-[#D97706] shadow-lg shadow-[#F59E0B]/25">
+                <i class="bi bi-download"></i> Download Guide (PDF)
+              </a>
+            </div>
+            <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100">
+              <div class="flex items-center gap-4 mb-4">
+                <div class="w-14 h-14 rounded-2xl bg-[#F59E0B]/10 flex items-center justify-center text-[#F59E0B] text-2xl">
+                  <i class="bi bi-file-earmark-pdf-fill"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-900">Key Library Guide v2.4</h4>
+                  <p class="text-sm text-slate-400">PDF — 2.4 MB</p>
+                </div>
+              </div>
+              <ul class="space-y-2 text-sm text-slate-500">
+                <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-[#F59E0B]"></i> 12 key types explained</li>
+                <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-[#F59E0B]"></i> 30+ brand compatibility list</li>
+                <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-[#F59E0B]"></i> Visual identification charts</li>
+                <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-[#F59E0B]"></i> Estimated service times</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer"></div>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'ui-sans-serif', 'system-ui'],
+          },
+        },
+      },
+    }
+    lucide.createIcons();
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const revealElements = document.querySelectorAll('.js-reveal');
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { root: null, threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+      revealElements.forEach(el => revealObserver.observe(el));
+    });
+  </script>
+  <script src="navbar.js"></script>
+  <script src="footer.js"></script>
+</body>
+
+</html>

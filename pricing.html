@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Price Matrix - KeyDash</title>
+  <link rel="icon" href="images/logo.jpeg">
+  <script src="tailwind.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .rtl { direction: rtl; }
+    [dir="rtl"] .title { margin-right: 20px !important; }
+    :root { --home-bg: #ffffff; --text-color: #111111; }
+    [data-theme="dark"] { --home-bg: #000000; --text-color: #ffffff; }
+    body {
+      background-color: var(--home-bg) !important;
+      color: var(--text-color);
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+    [data-theme="dark"] section, [data-theme="dark"] .card { background-color: #111111 !important; border-color: #333333 !important; }
+    [data-theme="dark"] .btn, [data-theme="dark"] .btn1:hover { color: #000000 !important; }
+    [data-theme="dark"] body, [data-theme="dark"] p, [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3,
+    [data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6, [data-theme="dark"] span, [data-theme="dark"] li,
+    [data-theme="dark"] a, [data-theme="dark"] label, [data-theme="dark"] small, [data-theme="dark"] strong, [data-theme="dark"] .title { color: #ffffff !important; }
+    [data-theme="dark"] main { background-color: #111111 !important; }
+    [data-theme="dark"] .bg-white, [data-theme="dark"] .bg-slate-50 { background-color: #111111 !important; }
+    [data-theme="dark"] .bg-white.rounded-2xl, [data-theme="dark"] .bg-slate-50.rounded-3xl,
+    [data-theme="dark"] .bg-slate-50.p-8 { background-color: #1a1a1a !important; border-color: #2a2a2a !important; }
+    [data-theme="dark"] .bg-amber-50 { background-color: #2a1f00 !important; }
+    [data-theme="dark"] .bg-slate-100 { background-color: #1a1a1a !important; }
+    [data-theme="dark"] .text-slate-500, [data-theme="dark"] .text-slate-600 { color: #9ca3af !important; }
+    [data-theme="dark"] .text-slate-900 { color: #f1f5f9 !important; }
+    [data-theme="dark"] .text-slate-300 { color: #cbd5e1 !important; }
+    [data-theme="dark"] .text-slate-400 { color: #94a3b8 !important; }
+    [data-theme="dark"] .text-slate-800 { color: #e2e8f0 !important; }
+    [data-theme="dark"] .border-slate-100, [data-theme="dark"] .border-slate-200 { border-color: #2a2a2a !important; }
+    [data-theme="dark"] .bg-slate-900 { background-color: #1a1a1a !important; }
+    [data-theme="dark"] a.bg-white.text-slate-900 {
+      background-color: #1a1a1a !important; color: #ffffff !important; border: 1px solid #333333 !important;
+    }
+    [data-theme="dark"] a.bg-white.text-slate-900:hover { background-color: #2a2a2a !important; }
+    [data-theme="dark"] .bg-slate-900.text-white { background-color: #0a0a0a !important; }
+    [data-theme="dark"] .hover\:bg-slate-50:hover { background-color: #1f1f1f !important; }
+    [data-theme="dark"] .bg-green-50 { background-color: #0a2a0a !important; }
+    .js-reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .js-reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+  </style>
+</head>
+
+<body class="font-sans">
+  <div id="navbar"></div>
+  <main class="w-full bg-white overflow-hidden font-sans">
+    <!-- HERO BANNER -->
+    <section class="relative min-h-[75vh] flex items-center pt-28 pb-20 lg:pt-36 lg:pb-28 overflow-hidden">
+      <div class="absolute inset-0 bg-[url('images/bg3.avif')] bg-cover bg-center bg-no-repeat"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/80 to-slate-900/60"></div>
+      <div class="absolute -top-20 -right-20 w-96 h-96 bg-[#F59E0B]/10 rounded-full blur-3xl"></div>
+      <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div class="max-w-3xl mx-auto text-center">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F59E0B]/10 text-[#F59E0B] border border-[#F59E0B]/30 font-semibold text-sm mb-6 backdrop-blur-sm animate-fade-up" style="animation-delay:0.1s">
+            <i class="bi bi-tag-fill"></i> Transparent Pricing
+          </div>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight animate-fade-up" style="animation-delay:0.2s">
+            Price <span class="text-[#F59E0B]">Matrix</span>
+          </h1>
+          <p class="mt-6 text-lg md:text-xl text-slate-300 leading-relaxed max-w-2xl animate-fade-up" style="animation-delay:0.3s">
+            No hidden fees. No surprises. Our pricing is upfront and honest — you'll know exactly what you're paying before we start any work.
+          </p>
+          <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up" style="animation-delay:0.4s">
+            <a href="#pricing-table" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-[#F59E0B] text-white text-lg font-bold hover:bg-[#D97706] shadow-lg shadow-[#F59E0B]/25 inline-flex items-center justify-center gap-2">
+              <i class="bi bi-table"></i> View Full Pricing
+            </a>
+            <a href="contact.html" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/10 text-white border border-white/20 text-lg font-bold hover:bg-white/20 backdrop-blur-md inline-flex items-center justify-center gap-2">
+              <i class="bi bi-chat-dots-fill"></i> Request Custom Quote
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING PLANS -->
+    <section id="pricing-table" class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Standard Rates</h2>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900">Service Pricing Overview</h3>
+          <p class="mt-4 text-slate-500 text-lg">Starting prices for common key services. Final pricing may vary by vehicle make and model.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative group">
+            <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-2xl mb-6 group-hover:scale-110 transition-transform">
+              <i class="bi bi-key"></i>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900 mb-1">Standard Key</h4>
+            <p class="text-sm text-slate-400 mb-4">Cut, programmed and tested</p>
+            <div class="flex items-baseline gap-1 mb-6">
+              <span class="text-sm text-slate-400">From</span>
+              <span class="text-4xl font-extrabold text-slate-900"></span>
+            </div>
+            <ul class="space-y-3 text-sm text-slate-600 mb-8">
+              <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> Key cutting included</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> Basic transponder chip</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> On-site service</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> 15 min turnaround</li>
+            </ul>
+            <a href="contact.html" class="block w-full text-center py-3 rounded-xl border-2 border-[#F59E0B] text-[#F59E0B] font-bold hover:bg-[#F59E0B] hover:text-white transition duration-200">
+              Book Service
+            </a>
+          </div>
+          <div class="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative group">
+            <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-2xl mb-6 group-hover:scale-110 transition-transform">
+              <i class="bi bi-cpu"></i>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900 mb-1">Transponder Key</h4>
+            <p class="text-sm text-slate-400 mb-4">Chipped key replacement</p>
+            <div class="flex items-baseline gap-1 mb-6">
+              <span class="text-sm text-slate-400">From</span>
+              <span class="text-4xl font-extrabold text-slate-900"></span>
+            </div>
+            <ul class="space-y-3 text-sm text-slate-600 mb-8">
+              <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> Immobilizer programming</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> OEM-quality blank</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> On-site service</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> 30 min turnaround</li>
+            </ul>
+            <a href="contact.html" class="block w-full text-center py-3 rounded-xl border-2 border-[#F59E0B] text-[#F59E0B] font-bold hover:bg-[#F59E0B] hover:text-white transition duration-200">
+              Book Service
+            </a>
+          </div>
+          <div class="bg-white rounded-2xl p-8 border-[#F59E0B]/30 shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative group ring-2 ring-[#F59E0B]/20">
+            <div class="absolute top-4 right-4 bg-[#F59E0B] text-white text-xs font-bold px-3 py-1 rounded-full">Most Popular</div>
+            <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-2xl mb-6 group-hover:scale-110 transition-transform">
+              <i class="bi bi-lock"></i>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900 mb-1">Remote Fob</h4>
+            <p class="text-sm text-slate-400 mb-4">Keyless entry remote</p>
+            <div class="flex items-baseline gap-1 mb-6">
+              <span class="text-sm text-slate-400">From</span>
+              <span class="text-4xl font-extrabold text-slate-900"></span>
+            </div>
+            <ul class="space-y-3 text-sm text-slate-600 mb-8">
+              <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> Remote programming</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> Rolling code sync</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> On-site service</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> 30 min turnaround</li>
+            </ul>
+            <a href="contact.html" class="block w-full text-center py-3 rounded-xl bg-[#F59E0B] text-white font-bold hover:bg-[#D97706] shadow-lg shadow-[#F59E0B]/25 transition duration-200">
+              Book Service
+            </a>
+          </div>
+          <div class="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative group">
+            <div class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-[#F59E0B] text-2xl mb-6 group-hover:scale-110 transition-transform">
+              <i class="bi bi-wifi"></i>
+            </div>
+            <h4 class="text-lg font-bold text-slate-900 mb-1">Smart / Prox Key</h4>
+            <p class="text-sm text-slate-400 mb-4">Push-start proximity fob</p>
+            <div class="flex items-baseline gap-1 mb-6">
+              <span class="text-sm text-slate-400">From</span>
+              <span class="text-4xl font-extrabold text-slate-900"></span>
+            </div>
+            <ul class="space-y-3 text-sm text-slate-600 mb-8">
+              <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> Proximity programming</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> Keyless entry + start</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> On-site service</li>
+              <li class="flex items-center gap-2"><i class="bi bi-check-circle-fill text-green-500"></i> 45 min turnaround</li>
+            </ul>
+            <a href="contact.html" class="block w-full text-center py-3 rounded-xl border-2 border-[#F59E0B] text-[#F59E0B] font-bold hover:bg-[#F59E0B] hover:text-white transition duration-200">
+              Book Service
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADD-ON SERVICES -->
+    <section class="py-24 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Add-Ons</h2>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900">Additional Services and Surcharges</h3>
+          <p class="mt-4 text-slate-500 text-lg">Optional extras and vehicle-specific adjustments that may apply.</p>
+        </div>
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="bg-slate-50 border-b border-slate-100">
+                  <th class="px-6 py-4 text-sm font-bold text-slate-900">Service</th>
+                  <th class="px-6 py-4 text-sm font-bold text-slate-900 text-right">Price</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <i class="bi bi-truck text-[#F59E0B]"></i>
+                      <div><span class="font-medium text-slate-900">Emergency Lockout Day</span><p class="text-xs text-slate-400">6 AM - 8 PM</p></div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-right"><span class="font-bold text-slate-900">$75</span></td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <i class="bi bi-moon-stars text-[#F59E0B]"></i>
+                      <div><span class="font-medium text-slate-900">Emergency Lockout Night</span><p class="text-xs text-slate-400">8 PM - 6 AM</p></div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-right"><span class="font-bold text-slate-900">$110</span></td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <i class="bi bi-wrench-adjustable text-[#F59E0B]"></i>
+                      <div><span class="font-medium text-slate-900">Broken Key Extraction</span><p class="text-xs text-slate-400">Per lock cylinder</p></div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-right"><span class="font-bold text-slate-900">$65</span></td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <i class="bi bi-car-front-fill text-[#F59E0B]"></i>
+                      <div><span class="font-medium text-slate-900">Ignition Cylinder Repair</span><p class="text-xs text-slate-400">Labor + parts if needed</p></div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-right"><span class="font-bold text-slate-900">$150<span class="text-xs font-normal text-slate-400 ml-1">+ parts</span></span></td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <i class="bi bi-files text-[#F59E0B]"></i>
+                      <div><span class="font-medium text-slate-900">Additional Key Spare</span><p class="text-xs text-slate-400">When ordered with primary</p></div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-right"><span class="font-bold text-green-600">−15% off</span></td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                      <i class="bi bi-geo-alt-fill text-[#F59E0B]"></i>
+                      <div><span class="font-medium text-slate-900">Remote Location Fee</span><p class="text-xs text-slate-400">Beyond 20-mile radius</p></div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-right"><span class="font-bold text-slate-900">$25<span class="text-xs font-normal text-slate-400 ml-1">/trip</span></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- PRICE GUARANTEE -->
+    <section class="py-24 bg-white relative overflow-hidden">
+      <div class="absolute -top-40 -left-40 w-96 h-96 bg-[#F59E0B]/5 rounded-full blur-3xl"></div>
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div class="bg-slate-900 rounded-3xl p-10 md:p-14 border border-slate-800 relative overflow-hidden">
+            <div class="absolute -top-20 -right-20 text-9xl text-[#F59E0B]/5"><i class="bi bi-shield-check"></i></div>
+            <div class="relative z-10">
+              <div class="w-16 h-16 rounded-2xl bg-[#F59E0B]/10 flex items-center justify-center text-[#F59E0B] text-3xl mb-6">
+                <i class="bi bi-shield-fill-check"></i>
+              </div>
+              <h3 class="text-3xl font-extrabold text-white mb-4">Price Match Guarantee</h3>
+              <p class="text-slate-400 text-lg mb-6">
+                Found a lower price from a comparable certified mobile locksmith? We'll match it and beat it by 10%. We're confident our pricing is the fairest in the market.
+              </p>
+              <ul class="space-y-3 text-sm">
+                <li class="flex items-center gap-3 text-slate-300">
+                  <i class="bi bi-check-circle-fill text-[#F59E0B]"></i> Must be a licensed mobile locksmith
+                </li>
+                <li class="flex items-center gap-3 text-slate-300">
+                  <i class="bi bi-check-circle-fill text-[#F59E0B]"></i> Same key type and service level
+                </li>
+                <li class="flex items-center gap-3 text-slate-300">
+                  <i class="bi bi-check-circle-fill text-[#F59E0B]"></i> Valid written quote required
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Why Trust Us</h2>
+            <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight mb-6">Honest Pricing, No Hidden Costs</h3>
+            <p class="text-slate-500 text-lg mb-8">
+              We believe in complete transparency. The price we quote is the price you pay. No dispatch fees, no surprise surcharges, no "service charges" added after the job.
+            </p>
+            <div class="space-y-4">
+              <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center text-green-600"><i class="bi bi-check-lg text-xl"></i></div>
+                <div>
+                  <h4 class="font-bold text-slate-900 text-sm">Free Quote</h4>
+                  <p class="text-xs text-slate-500">No charge for estimates or diagnostic inspection.</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center text-green-600"><i class="bi bi-check-lg text-xl"></i></div>
+                <div>
+                  <h4 class="font-bold text-slate-900 text-sm">No Travel Fee</h4>
+                  <p class="text-xs text-slate-500">Free dispatch within standard coverage area.</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100">
+                <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center text-green-600"><i class="bi bi-check-lg text-xl"></i></div>
+                <div>
+                  <h4 class="font-bold text-slate-900 text-sm">Pay On Completion</h4>
+                  <p class="text-xs text-slate-500">Only pay when the key works perfectly.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SAVINGS CALCULATOR -->
+    <section class="py-24 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">Savings</h2>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900">Compare vs. Dealership</h3>
+          <p class="mt-4 text-slate-500 text-lg">See how much you save by choosing Mobile Keys over the dealership.</p>
+        </div>
+        <div class="max-w-5xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-2xl p-8 border border-slate-100 text-center hover:shadow-lg transition-all duration-300">
+              <div class="text-sm font-bold text-slate-400 uppercase mb-2">Dealership</div>
+              <div class="text-4xl font-extrabold text-red-500 mb-2"></div>
+              <p class="text-sm text-slate-500">Average transponder key price at a dealership, plus towing fees if you can't drive there.</p>
+              <div class="mt-4 flex items-center justify-center gap-1 text-red-500 text-sm"><i class="bi bi-arrow-down"></i> More expensive</div>
+            </div>
+            <div class="bg-white rounded-2xl p-8 border-[#F59E0B]/30 shadow-lg text-center ring-2 ring-[#F59E0B]/20 relative hover:shadow-xl transition-all duration-300">
+              <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#F59E0B] text-white text-[10px] font-bold px-3 py-1 rounded-full">Best Value</div>
+              <div class="text-sm font-bold text-[#F59E0B] uppercase mb-2 mt-2">Mobile Keys</div>
+              <div class="text-5xl font-extrabold text-slate-900 mb-2"></div>
+              <p class="text-sm text-slate-500">Our standard transponder key price. Includes on-site programming, cutting, and testing.</p>
+              <div class="mt-4 flex items-center justify-center gap-1 text-green-500 text-sm"><i class="bi bi-arrow-up"></i> Save 75%</div>
+            </div>
+            <div class="bg-white rounded-2xl p-8 border border-slate-100 text-center hover:shadow-lg transition-all duration-300">
+              <div class="text-sm font-bold text-slate-400 uppercase mb-2">You Save</div>
+              <div class="text-4xl font-extrabold text-green-500 mb-2"></div>
+              <p class="text-sm text-slate-500">Average savings per key replacement. Plus no towing, no rental car, no lost work time.</p>
+              <div class="mt-4 flex items-center justify-center gap-1 text-green-500 text-sm"><i class="bi bi-arrow-up"></i> Savings</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-24 bg-white">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-[#F59E0B] font-bold tracking-wider uppercase text-sm mb-2">FAQ</h2>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900">Pricing Questions</h3>
+        </div>
+        <div class="space-y-4">
+          <div class="bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
+            <details class="group">
+              <summary class="flex items-center justify-between p-6 cursor-pointer text-lg font-bold text-slate-900 hover:text-[#F59E0B] transition-colors">
+                Do you charge extra for luxury vehicles?
+                <i class="bi bi-chevron-down group-open:rotate-180 transition-transform"></i>
+              </summary>
+              <div class="px-6 pb-6 text-slate-500">Some luxury brands require specialized programming protocols and proprietary equipment. A modest surcharge may apply for BMW, Mercedes, Audi, Porsche, Land Rover, and similar premium makes.</div>
+            </details>
+          </div>
+          <div class="bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
+            <details class="group">
+              <summary class="flex items-center justify-between p-6 cursor-pointer text-lg font-bold text-slate-900 hover:text-[#F59E0B] transition-colors">
+                Is there a discount for multiple keys?
+                <i class="bi bi-chevron-down group-open:rotate-180 transition-transform"></i>
+              </summary>
+              <div class="px-6 pb-6 text-slate-500">Yes. When you order a spare key along with your primary replacement, the additional key is discounted by . Fleet and multi-vehicle discounts are also available for commercial clients.</div>
+            </details>
+          </div>
+          <div class="bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
+            <details class="group">
+              <summary class="flex items-center justify-between p-6 cursor-pointer text-lg font-bold text-slate-900 hover:text-[#F59E0B] transition-colors">
+                What if the key doesn't work after programming?
+                <i class="bi bi-chevron-down group-open:rotate-180 transition-transform"></i>
+              </summary>
+              <div class="px-6 pb-6 text-slate-500">We guarantee all programming on vehicles we service. If the key doesn't function as expected, we'll troubleshoot and resolve the issue at no additional cost. You only pay when the key works correctly.</div>
+            </details>
+          </div>
+          <div class="bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
+            <details class="group">
+              <summary class="flex items-center justify-between p-6 cursor-pointer text-lg font-bold text-slate-900 hover:text-[#F59E0B] transition-colors">
+                Do you accept insurance claims?
+                <i class="bi bi-chevron-down group-open:rotate-180 transition-transform"></i>
+              </summary>
+              <div class="px-6 pb-6 text-slate-500">Yes. Many roadside assistance plans and comprehensive auto insurance policies cover key replacement. We can provide an itemized receipt for reimbursement. Check with your provider for coverage details.</div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+
+  <div id="footer"></div>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Poppins', 'ui-sans-serif', 'system-ui'],
+          },
+        },
+      },
+    }
+    lucide.createIcons();
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const revealElements = document.querySelectorAll('.js-reveal');
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { root: null, threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+      revealElements.forEach(el => revealObserver.observe(el));
+    });
+  </script>
+  <script src="navbar.js"></script>
+  <script src="footer.js"></script>
+</body>
+
+</html>
