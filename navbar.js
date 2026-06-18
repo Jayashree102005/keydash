@@ -326,14 +326,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (link.getAttribute("href") === currentPath) {
       link.classList.add("nav-active");
       if (link.closest("#mobileDropdownMenu")) {
-        document.getElementById("mobileDropdownMenu")?.classList.remove("hidden");
         document.getElementById("mobileDropdownBtn")?.classList.add("home-active");
-        document.getElementById('mobileHomeChevron')?.classList.add('rotate-180');
       }
       if (link.closest("#mobileDashboardMenu")) {
-        document.getElementById("mobileDashboardMenu")?.classList.remove("hidden");
         document.getElementById("mobileDashboardBtn")?.classList.add("nav-active");
-        document.getElementById('mobileDashboardChevron')?.classList.add('rotate-180');
       }
     }
   });
