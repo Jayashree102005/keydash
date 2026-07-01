@@ -64,8 +64,6 @@ button[type="submit"],
   left: 0;
   bottom: -6px;
   width: 100%;
-  height: 2px;
-  background-color: #F59E0B;
   border-radius: 2px;
 }
 
@@ -304,8 +302,4 @@ button[type="submit"],
   #hamburgerBtn i {
     font-size: 20px;
   }
-}
-
-.h5 {
-  color: #38BDF8;
 }
